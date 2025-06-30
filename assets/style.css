@@ -1,5 +1,17 @@
 /*Leaflet Map CSS*/
-#map { height: 500px;
+#map { 
+  height: 500px;
   width: 100%;
   margin: 0 auto;
+  border: 2px solid #ccc;
+}
+
+#map .leaflet-container {
+  background-color: #f0f0f0;
+}
+
+#dropdown {
+  margin-top: 10px;
+  background: white;
+  padding: 10px;
 }

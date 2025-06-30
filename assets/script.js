@@ -1,9 +1,11 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 // Lat and long for Brighton
-const BRIGHTON_LAT = 50.83;
-const BRIGHTON_LNG = -0.15;
+const BRIGHTON_LAT = 50.86;
+const BRIGHTON_LNG = -0.16;
 
 //Script to initialize the Leaflet map
-var map = L.map('map').setView([BRIGHTON_LAT, BRIGHTON_LNG], 14);
+var map = L.map('map').setView([BRIGHTON_LAT, BRIGHTON_LNG], 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -21,7 +23,7 @@ function LastMonthDate() {
 
 // Fetch crime data
 async function fetchCrimeData() {
-    const lastMonth = await LastMonthDate(); 
+    const lastMonth = LastMonthDate(); 
     const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${BRIGHTON_LAT}&lng=${BRIGHTON_LNG}&date=${lastMonth}`;
     
     try {
@@ -59,3 +61,8 @@ async function loadCrimes() {
 
 // Call the function to load crimes
 loadCrimes();
+
+console.log (LastMonthDate());console.log (LastMonthDate());
+
+});
+
