@@ -15,7 +15,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // Function to get the last month date in YYYY-MM format
 function LastMonthDate() {
     const date = new Date();
-    date.setMonth(date.getMonth() - 2);//set to 2 months to get more data, data seems to be delayed (so in June, it will fetch April)
+    date.setMonth(date.getMonth() - 3);//set to 3 months to get more data, data seems to be delayed (so in June, it will fetch April)
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     return `${year}-${month}`;
@@ -33,9 +33,10 @@ async function fetchCrimeData() {
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
-        return null;
     }
 }
+
+let markers = []; // Add this at the top inside DOMContentLoaded
 
 // Function to add markers to the map
 function addCrimeMarkers(crimes) {
@@ -44,9 +45,10 @@ function addCrimeMarkers(crimes) {
         const lng = parseFloat(crime.location.longitude);
         
         if (lat && lng) {
-            L.marker([lat, lng])
+            const marker = L.marker([lat, lng])
                 .addTo(map)
                 .bindPopup(`<b>${crime.category}</b><br>${crime.location.street.name}`);
+            markers.push(marker); 
         }
         });
     }
@@ -66,3 +68,19 @@ console.log (LastMonthDate());console.log (LastMonthDate());
 
 });
 
+// Dropdown functionality
+
+// Function to clear existing markers
+function clearMarkers() {
+    markers.forEach(marker => map.removeLayer(marker));
+    markers = [];
+}
+
+// Function to filter crimes by category
+function filterCrimesByCategory(category) {
+   
+}
+
+function updateMarkersByCategory(category) {
+    (clearMarkers)();
+}
