@@ -7,11 +7,23 @@
 }
 
 #map .leaflet-container {
-  background-color: #f0f0f0;
+  background-color: #e9b3b3;
 }
 
 #dropdown {
+  width: 45%;
   margin-top: 10px;
-  background: white;
+  padding: 10px;
+}
+
+#info {
+  width: 45%;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+#crime-list {
+  width: 45%;
+  margin-top: 10px;
   padding: 10px;
 }

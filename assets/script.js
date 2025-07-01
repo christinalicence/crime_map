@@ -16,7 +16,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 
-// Function to get the last month date in YYYY-MM format
+// Function to get the last 3 months date in YYYY-MM format
 function LastMonthDate() {
     const date = new Date();
     date.setMonth(date.getMonth() - 3);//set to 3 months to get more data, data seems to be delayed (so in June, it will fetch April)
@@ -73,7 +73,7 @@ console.log (LastMonthDate());console.log (LastMonthDate());
 
 // Dropdown functionality
 
-// Function to clear existing markers
+// Function to work with the dropdown
 document.getElementById("crime-type").addEventListener("change", function() {
     const selectedCategory = this.value;
     console.log(`Selected category: ${selectedCategory}`);
@@ -92,7 +92,7 @@ function filterCrimesByCategory(category) {
 
 function clearMarkers() {
     markers.forEach(marker => map.removeLayer(marker));
-    markers = []; // Reset markers array
+    markers = []; // Resets markers array
 }
 
 // Function to update markers by category
@@ -102,3 +102,7 @@ function updateMarkersByCategory(category) {
     addCrimeMarkers(filteredCrimes);
 }
 });
+
+// Function to display most recent date for data in the info div
+
+// Function to generate info for the list div
