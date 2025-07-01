@@ -1,12 +1,16 @@
-document.addEventListener('DOMContentLoaded', function() {
+let map; // Declare map variable globally
+let markers = []; // Declare markers array globally, filled as site runs
+let allCrimes = []; // Declare allCrimes array globally, filled as site runs
+
+document.addEventListener("DOMContentLoaded", function() {
 
 // Lat and long for Brighton
 const BRIGHTON_LAT = 50.86;
 const BRIGHTON_LNG = -0.16;
 
 //Script to initialize the Leaflet map
-var map = L.map('map').setView([BRIGHTON_LAT, BRIGHTON_LNG], 13);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+map = L.map("map").setView([BRIGHTON_LAT, BRIGHTON_LNG], 13);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
@@ -32,11 +36,9 @@ async function fetchCrimeData() {
         console.log(`Found ${data.length} crimes`);
         return data;
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
     }
 }
-
-let markers = []; // Add this at the top inside DOMContentLoaded
 
 // Function to add markers to the map
 function addCrimeMarkers(crimes) {
@@ -57,6 +59,7 @@ function addCrimeMarkers(crimes) {
 async function loadCrimes() {
     const crimes = await fetchCrimeData();
     if (crimes) {
+        allCrimes = crimes; 
         addCrimeMarkers(crimes);
     }
 }
@@ -66,21 +69,36 @@ loadCrimes();
 
 console.log (LastMonthDate());console.log (LastMonthDate());
 
-});
+
 
 // Dropdown functionality
 
 // Function to clear existing markers
-function clearMarkers() {
-    markers.forEach(marker => map.removeLayer(marker));
-    markers = [];
-}
+document.getElementById("crime-type").addEventListener("change", function() {
+    const selectedCategory = this.value;
+    console.log(`Selected category: ${selectedCategory}`);
+    updateMarkersByCategory(selectedCategory);
+});
 
 // Function to filter crimes by category
 function filterCrimesByCategory(category) {
-   
+   if (category === "all") {
+        console.log(`Returning all ${allCrimes.length} crimes`);
+        return allCrimes; // Return all crimes if 'all' is selected
+    } else {
+        return allCrimes.filter(crime => crime.category === category);
+    }
 }
 
-function updateMarkersByCategory(category) {
-    (clearMarkers)();
+function clearMarkers() {
+    markers.forEach(marker => map.removeLayer(marker));
+    markers = []; // Reset markers array
 }
+
+// Function to update markers by category
+function updateMarkersByCategory(category) {
+    clearMarkers();
+    const filteredCrimes = filterCrimesByCategory(category);
+    addCrimeMarkers(filteredCrimes);
+}
+});
