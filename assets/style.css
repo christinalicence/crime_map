@@ -15,13 +15,14 @@ body {
 
 #map-container {
   flex: 1;
+  flex-shrink: 0;
 }
 
 #sidebar-container {
   width: 35%;
   padding: 20px;
   background-color: #fff;
-  border-left: 2px solid #ccc;
+  border-right: 2px solid #ccc;
   overflow-y: auto;
 }
 

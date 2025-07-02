@@ -72,8 +72,9 @@ async function loadCrimes() {
     }
 }
 
-// Call the function to load crimes
+// Call the function to load crimes and display the last updated date
 loadCrimes();
+displayLastUpdatedDate() 
 
 console.log (LastMonthDate());console.log (LastMonthDate());
 
@@ -81,7 +82,7 @@ console.log (LastMonthDate());console.log (LastMonthDate());
 
 // Dropdown functionality
 
-// Function to work with the dropdown
+// Function to make the dropdown update the map markers
 document.getElementById("crime-type").addEventListener("change", function() {
     const selectedCategory = this.value;
     console.log(`Selected category: ${selectedCategory}`);
@@ -112,5 +113,14 @@ function updateMarkersByCategory(category) {
 });
 
 // Function to display most recent date for data in the info div
+function displayLastUpdatedDate() {
+    fetch("https://data.police.uk/api/crime-last-updated")
+        .then(response => response.json())
+        .then(data => {
+            const lastUpdatedDate = new Date(data.date);
+            const formattedDate = lastUpdatedDate.toLocaleDateString('en-GB');
+            document.getElementById("last-date").textContent = formattedDate;
+        });
+}
 
 // Function to generate info for the list div
