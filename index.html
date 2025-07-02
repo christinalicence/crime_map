@@ -10,42 +10,54 @@
      crossorigin=""/>
     <!-- Link to custom CSS -->
     <link rel="stylesheet" href="assets/style.css">
+    
+    
 </head>
 <body>
-    <h1>Crime Map of Brighton</h1>
- <div id="map"></div>
- <div id = "dropdown">
-     <label for="crime-type">Select Crime Type:</label>
-    <select id="crime-type">
-        <option value="all">All Crimes</option>
-        <option value="anti-social-behaviour">Anti-social Behaviour</option>
-        <option value="bicycle-theft">Bicycle Theft</option>
-        <option value="burglary">Burglary</option>
-        <option value="criminal-damage-arson">Criminal Damage & Arson</option>
-        <option value="drugs">Drugs</option>
-        <option value="other-crime">Other Crime</option>
-        <option value="other-theft">Other Theft</option>
-        <option value="possession-of-weapons">Possession of Weapons</option>
-        <option value="public-order">Public Order</option>
-        <option value="robbery">Robbery</option>
-        <option value="shoplifting">Shoplifting</option>
-        <option value="theft-from-the-person">Theft from the Person</option>
-        <option value="vehicle-crime">Vehicle Crime</option>
-        <option value="violent-crime">Violent Crime</option>
-    </select>
+    <h1 id="title">Crime Map of Brighton</h1>
+    <div id="main-container">
+      <div id="sidebar-container">
+        <div id="sidebar">
+            <h2>Crime Data</h2>
+            <p>Select a crime type from the dropdown to view details.</p>
+        </div>
+        <div id="dropdown">
+         <label for="crime-type">Select Crime Type:</label>
+        <select id="crime-type">
+            <option value="all">All Crimes</option>
+            <option value="anti-social-behaviour">Anti-social Behaviour</option>
+            <option value="bicycle-theft">Bicycle Theft</option>
+            <option value="burglary">Burglary</option>
+            <option value="criminal-damage-arson">Criminal Damage & Arson</option>
+            <option value="drugs">Drugs</option>
+            <option value="other-crime">Other Crime</option>
+            <option value="other-theft">Other Theft</option>
+            <option value="possession-of-weapons">Possession of Weapons</option>
+            <option value="public-order">Public Order</option>
+            <option value="robbery">Robbery</option>
+            <option value="shoplifting">Shoplifting</option>
+            <option value="theft-from-the-person">Theft from the Person</option>
+            <option value="vehicle-crime">Vehicle Crime</option>
+            <option value="violent-crime">Violent Crime</option>
+        </select>
 
-    <div id="crime-list">
-        <h2>Crime List</h2>
-        <ul id="crime-items">
-        </ul>
+        <div id="crime-list">
+            <h2>Crime List</h2>
+            <ul id="crime-items">
+            </ul>
+        </div>
+        </div>
+      </div>
+      <div id="map-container">
+      <div id="map"></div>
+    
+    
+    <div id="info">
+        <p>Data is from the last 3 months, updated when the Police release new data. The most recent update is from <span id="last-date">UPDATE TBC</span></p>
+    </div>
+        </div>
     </div>
 
-<div id="info">
-    <p>Data is from the last 3 months, updated when the Police realease new data. The most recent update is from <span id=""last-date">UPDATE TBC</span> </p>
-</div>
-
-
- </div>
     <!-- Link to Leaflet JavaScript -->
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="

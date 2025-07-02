@@ -19,7 +19,7 @@ const tightBounds = L.latLngBounds(
     [50.88, -0.10]   
 );
 map.setMaxBounds(tightBounds);
-map.setMinZoom(11);  
+map.setMinZoom(13);  
 map.setMaxZoom(18);  
 
 
