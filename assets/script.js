@@ -9,11 +9,19 @@ const BRIGHTON_LAT = 50.86;
 const BRIGHTON_LNG = -0.16;
 
 //Script to initialize the Leaflet map
-map = L.map("map").setView([BRIGHTON_LAT, BRIGHTON_LNG], 13);
+map = L.map("map").setView([BRIGHTON_LAT, BRIGHTON_LNG], 14);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+// Set the map bounds to a tight area around Brighton
+const tightBounds = L.latLngBounds(
+    [50.82, -0.20],  
+    [50.88, -0.10]   
+);
+map.setMaxBounds(tightBounds);
+map.setMinZoom(11);  
+map.setMaxZoom(18);  
+
 
 
 // Function to get the last 3 months date in YYYY-MM format
