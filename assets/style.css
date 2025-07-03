@@ -22,20 +22,16 @@ body {
   width: 35%;
   padding: 20px;
   background-color: #fff;
-  border-right: 2px solid #ccc;
   overflow-y: auto;
+  border: 2px solid #ccc;
 }
 
 /*Leaflet Map CSS*/
 #map { 
-  height: 400px;
+  height: 500px;
   width: 90%;
   margin: 0 auto;
   border: 2px solid #ccc;
-}
-
-#map .leaflet-container {
-  background-color: #e9b3b3;
 }
 
 /* Title Styles */
@@ -58,7 +54,7 @@ body {
 #info {
   text-align: center;
   width: 90%;
-  margin-top: 10px;
+  margin: 30px;
   padding: 10px;
 }
 

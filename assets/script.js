@@ -13,7 +13,7 @@ map = L.map("map").setView([BRIGHTON_LAT, BRIGHTON_LNG], 14);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-// Set the map bounds to a tight area around Brighton
+// Set the map bounds to stop people scrolling away 
 const tightBounds = L.latLngBounds(
     [50.82, -0.20],  
     [50.88, -0.10]   
@@ -57,13 +57,15 @@ function addCrimeMarkers(crimes) {
         if (lat && lng) {
             const marker = L.marker([lat, lng])
                 .addTo(map)
-                .bindPopup(`<b>${crime.category}</b><br>${crime.location.street.name}`);
+                .bindPopup(`<b>${formatCrimeCategory(crime.category)}</b><br>${crime.location.street.name}`);
             markers.push(marker); 
+        } else {
+            console.error("Invalid coordinates for crime:", crime);
         }
-        });
-    }
+    });
+}
 
-    // Load and display crimes
+// Load and display crimes
 async function loadCrimes() {
     const crimes = await fetchCrimeData();
     if (crimes) {
@@ -74,11 +76,10 @@ async function loadCrimes() {
 
 // Call the function to load crimes and display the last updated date
 loadCrimes();
-displayLastUpdatedDate() 
+displayLastUpdatedDate();
 
-console.log (LastMonthDate());console.log (LastMonthDate());
-
-
+console.log(LastMonthDate());
+console.log(LastMonthDate());
 
 // Dropdown functionality
 
@@ -91,7 +92,7 @@ document.getElementById("crime-type").addEventListener("change", function() {
 
 // Function to filter crimes by category
 function filterCrimesByCategory(category) {
-   if (category === "all") {
+    if (category === "all") {
         console.log(`Returning all ${allCrimes.length} crimes`);
         return allCrimes; // Return all crimes if 'all' is selected
     } else {
@@ -99,6 +100,7 @@ function filterCrimesByCategory(category) {
     }
 }
 
+// Function to clear existing markers from the map
 function clearMarkers() {
     markers.forEach(marker => map.removeLayer(marker));
     markers = []; // Resets markers array
@@ -110,7 +112,10 @@ function updateMarkersByCategory(category) {
     const filteredCrimes = filterCrimesByCategory(category);
     addCrimeMarkers(filteredCrimes);
 }
-});
+
+// End of DOMContentLoaded event listener
+
+}); // <-- Correctly close DOMContentLoaded event listener here
 
 // Function to display most recent date for data in the info div
 function displayLastUpdatedDate() {
@@ -123,4 +128,26 @@ function displayLastUpdatedDate() {
         });
 }
 
-// Function to generate info for the list div
+// Function to generate info for the list div or ammend existing function?
+
+
+// Function to format the crime category for display
+function formatCrimeCategory(category) {
+       const categoryNames = {
+        "anti-social-behaviour": "Anti-social Behaviour",
+        "bicycle-theft": "Bicycle Theft",
+        "burglary": "Burglary",
+        "criminal-damage-arson": "Criminal Damage & Arson",
+        "drugs": "Drugs",
+        "other-crime": "Other Crime",
+        "other-theft": "Other Theft",
+        "possession-of-weapons": "Possession of Weapons",
+        "public-order": "Public Order",
+        "robbery": "Robbery",
+        "shoplifting": "Shoplifting",
+        "theft-from-the-person": "Theft from the Person",
+        "vehicle-crime": "Vehicle Crime",
+        "violent-crime": "Violent Crime"
+    };
+    return categoryNames[category] || category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ');
+}
