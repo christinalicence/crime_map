@@ -46,20 +46,25 @@ body {
 
 /* Dropdown and Info Styles */
 #dropdown {
-  width: 45%;
+  width: 90%;
   margin-top: 10px;
   padding: 10px;
 }
 
 #info {
   text-align: center;
-  width: 90%;
+  width: 100%;
   margin: 30px;
   padding: 10px;
 }
 
 #crime-list {
-  width: 45%;
+  width: 100%;
   margin-top: 10px;
   padding: 10px;
+}
+
+.crime-items {
+  list-style-type: none;
+  padding: 0;
 }

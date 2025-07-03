@@ -71,6 +71,7 @@ async function loadCrimes() {
     if (crimes) {
         allCrimes = crimes; 
         addCrimeMarkers(crimes);
+         updateCrimeList(crimes);
     }
 }
 
@@ -78,7 +79,6 @@ async function loadCrimes() {
 loadCrimes();
 displayLastUpdatedDate();
 
-console.log(LastMonthDate());
 console.log(LastMonthDate());
 
 // Dropdown functionality
@@ -111,11 +111,12 @@ function updateMarkersByCategory(category) {
     clearMarkers();
     const filteredCrimes = filterCrimesByCategory(category);
     addCrimeMarkers(filteredCrimes);
+    updateCrimeList(filteredCrimes); 
 }
 
 // End of DOMContentLoaded event listener
 
-}); // <-- Correctly close DOMContentLoaded event listener here
+}); 
 
 // Function to display most recent date for data in the info div
 function displayLastUpdatedDate() {
@@ -128,7 +129,22 @@ function displayLastUpdatedDate() {
         });
 }
 
-// Function to generate info for the list div or ammend existing function?
+// Function to generate info for the crime list div
+
+function updateCrimeList(crimes) {
+    const listContainer = document.querySelector(".crime-items");
+    listContainer.innerHTML = ""; // Clear existing items
+
+    if (crimes.length === 0) {
+        listContainer.innerHTML = "<li>No crimes found for this category.</li>";
+        return;
+    }
+    crimes.forEach(crime => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${formatCrimeCategory(crime.category)} ${crime.location.street.name}`;
+        listContainer.appendChild(listItem);
+    });
+}
 
 
 // Function to format the crime category for display
