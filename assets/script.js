@@ -146,6 +146,10 @@ function updateCrimeList(crimes) {
     });
 }
 
+// Function to format location by removing changing first letter to lower case
+
+//Function to link the crimes to the correct map markers
+
 
 // Function to format the crime category for display
 function formatCrimeCategory(category) {
