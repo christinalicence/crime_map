@@ -1,8 +1,11 @@
 let map; // Declare map variable globally
 let markers = []; // Declare markers array globally, filled as site runs
 let allCrimes = []; // Declare allCrimes array globally, filled as site runs
+let crimeIndex = {}; // stores all crimes by a unique id
+
 
 document.addEventListener("DOMContentLoaded", function() {
+   
 
 // Lat and long for Brighton
 const BRIGHTON_LAT = 50.86;
@@ -55,10 +58,23 @@ function addCrimeMarkers(crimes) {
         const lng = parseFloat(crime.location.longitude);
         
         if (lat && lng) {
+            // Create a unique ID for each crime based on its category and location
+            const crimeId = `${crime.category}-${lat}-${lng}`;
+
+            // Store in the crimeIndex object
+            crime.crimeId = crimeId; // Add the unique ID to the crime object
+            crimeIndex[crimeId] = crime; // Store the crime in the index
+
             const marker = L.marker([lat, lng])
                 .addTo(map)
                 .bindPopup(`<b>${formatCrimeCategory(crime.category)}</b><br>${crime.location.street.name}`);
-            markers.push(marker); 
+            
+                marker.crimeId = crimeId; // Add the unique ID to the marker for later reference
+
+                // Save marker in the crime object for linking later
+                crime._marker = marker;
+
+                markers.push(marker); 
         } else {
             console.error("Invalid coordinates for crime:", crime);
         }
@@ -114,9 +130,6 @@ function updateMarkersByCategory(category) {
     updateCrimeList(filteredCrimes); 
 }
 
-// End of DOMContentLoaded event listener
-
-}); 
 
 // Function to display most recent date for data in the info div
 function displayLastUpdatedDate() {
@@ -147,12 +160,25 @@ function updateCrimeList(crimes) {
         const formattedStreetName = lowerCaseFirstLetter(crime.location.street.name);
         listItem.textContent = `${formatCrimeCategory(crime.category)} ${formattedStreetName}`;
         listContainer.appendChild(listItem);
+
+        // Attach crime ID to the list item for later reference
+        listItem.dataset.crimeId = crime.crimeId;
+
+        // Save the crime ID in the crime object for linking later
+        crime._listItem = listItem;
+
+        // Add click event to the list item to focus on the marker
+        listItem.addEventListener("click", function() {
+            const crimeId = this.dataset.crimeId;
+            const crimeData = crimeIndex[crimeId]; // Get the crime data from the index
+            if (crimeData && crimeData._marker) {
+                map.setView(crimeData._marker.getLatLng(), 15); // Zoom in on the marker
+                crimeData._marker.openPopup(); // Open the popup for the marker
+            }
+        });
     });
 }
 
-// Function to format location by removing changing first letter to lower case
-
-//Function to link the crimes to the correct map markers
 
 
 // Function to format the crime category for display
@@ -175,3 +201,6 @@ function formatCrimeCategory(category) {
     };
     return categoryNames[category] || category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ');
 }
+
+//end of document.addEventListener("DOMContentLoaded", function() {
+});
