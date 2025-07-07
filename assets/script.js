@@ -135,13 +135,17 @@ function updateCrimeList(crimes) {
     const listContainer = document.querySelector(".crime-items");
     listContainer.innerHTML = ""; // Clear existing items
 
+    // Convert the first letter of the string to lower case (used for location names)
+    const lowerCaseFirstLetter = (str) => str.charAt(0).toLowerCase() + str.slice(1);
+
     if (crimes.length === 0) {
         listContainer.innerHTML = "<li>No crimes found for this category.</li>";
         return;
     }
     crimes.forEach(crime => {
         const listItem = document.createElement("li");
-        listItem.textContent = `${formatCrimeCategory(crime.category)} ${crime.location.street.name}`;
+        const formattedStreetName = lowerCaseFirstLetter(crime.location.street.name);
+        listItem.textContent = `${formatCrimeCategory(crime.category)} ${formattedStreetName}`;
         listContainer.appendChild(listItem);
     });
 }
