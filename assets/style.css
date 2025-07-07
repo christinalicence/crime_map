@@ -68,3 +68,8 @@ body {
   list-style-type: none;
   padding: 0;
 }
+
+.highlight {
+  background-color: pink;
+  transition: background-color 0.5s ease;
+}

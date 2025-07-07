@@ -62,19 +62,28 @@ function addCrimeMarkers(crimes) {
             const crimeId = `${crime.category}-${lat}-${lng}`;
 
             // Store in the crimeIndex object
-            crime.crimeId = crimeId; // Add the unique ID to the crime object
-            crimeIndex[crimeId] = crime; // Store the crime in the index
+            crime.crimeId = crimeId;
+            crimeIndex[crimeId] = crime;
 
             const marker = L.marker([lat, lng])
                 .addTo(map)
                 .bindPopup(`<b>${formatCrimeCategory(crime.category)}</b><br>${crime.location.street.name}`);
             
-                marker.crimeId = crimeId; // Add the unique ID to the marker for later reference
+            marker.crimeId = crimeId;
+            crime._marker = marker;
+            markers.push(marker);
 
-                // Save marker in the crime object for linking later
-                crime._marker = marker;
-
-                markers.push(marker); 
+            // Move this inside the if block!
+            marker.on("click", () => {
+                const linkedCrime = crimeIndex[crime.crimeId];
+                if (linkedCrime && linkedCrime._listItem) {
+                    linkedCrime._listItem.scrollIntoView({ behavior: "smooth" });
+                    linkedCrime._listItem.classList.add("highlight");
+                    setTimeout(() => {
+                        linkedCrime._listItem.classList.remove("highlight");
+                    }, 2000);
+                }
+            });
         } else {
             console.error("Invalid coordinates for crime:", crime);
         }
