@@ -73,21 +73,31 @@ function addCrimeMarkers(crimes) {
             crime._marker = marker;
             markers.push(marker);
 
-            // Move this inside the if block!
             marker.on("click", () => {
-                const linkedCrime = crimeIndex[crime.crimeId];
+                const linkedCrime = crimeIndex[marker.crimeId];
                 if (linkedCrime && linkedCrime._listItem) {
-                    linkedCrime._listItem.scrollIntoView({ behavior: "smooth" });
-                    linkedCrime._listItem.classList.add("highlight");
-                    setTimeout(() => {
-                        linkedCrime._listItem.classList.remove("highlight");
-                    }, 2000);
+                    highlightListedItem(linkedCrime._listItem);
                 }
             });
         } else {
             console.error("Invalid coordinates for crime:", crime);
         }
     });
+}
+
+// Function to highlight the list item when its marker is clicked and remove previous highlights
+function highlightListedItem(listItem) {
+    // Remove highlight from all items
+    const allListItems = document.querySelectorAll(".crime-items li");
+    allListItems.forEach(li => {
+        li.classList.remove("highlight");
+    });
+    // Add highlight to the clicked item
+    if (listItem) {
+        listItem.classList.add("highlight");
+        // Scroll to the highlighted item
+        listItem.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
 }
 
 // Load and display crimes
@@ -100,7 +110,7 @@ async function loadCrimes() {
     }
 }
 
-// Call the function to load crimes and display the last updated date
+// Call the function to load crimes and display the last updated date in info
 loadCrimes();
 displayLastUpdatedDate();
 
@@ -181,8 +191,9 @@ function updateCrimeList(crimes) {
             const crimeId = this.dataset.crimeId;
             const crimeData = crimeIndex[crimeId]; // Get the crime data from the index
             if (crimeData && crimeData._marker) {
-                map.setView(crimeData._marker.getLatLng(), 15); // Zoom in on the marker
+                map.setView(crimeData._marker.getLatLng(), 15.5); // Zoom in on the marker
                 crimeData._marker.openPopup(); // Open the popup for the marker
+                highlightListedItem(this); // Highlight the clicked list item
             }
         });
     });
