@@ -7,7 +7,7 @@ let crimeIndex = {}; // stores all crimes by a unique id
 document.addEventListener("DOMContentLoaded", function() {
    
 
-// Lat and long for Brighton
+// Lat and long for North Brighton
 const BRIGHTON_LAT = 50.86;
 const BRIGHTON_LNG = -0.16;
 
