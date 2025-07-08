@@ -77,12 +77,10 @@ function addCrimeMarkers(crimes) {
                 const linkedCrime = crimeIndex[marker.crimeId];
                 if (linkedCrime && linkedCrime._listItem) {
                     highlightListedItem(linkedCrime._listItem);
-                }
+             }
             });
-        } else {
-            console.error("Invalid coordinates for crime:", crime);
         }
-    });
+    }); 
 }
 
 // Function to highlight the list item when its marker is clicked and remove previous highlights
@@ -106,7 +104,8 @@ async function loadCrimes() {
     if (crimes) {
         allCrimes = crimes; 
         addCrimeMarkers(crimes);
-         updateCrimeList(crimes);
+        updateCrimeList(crimes);
+        populateCrimeDropdown(crimes); // Populate dropdown with crime categories
     }
 }
 
@@ -141,13 +140,43 @@ function clearMarkers() {
     markers = []; // Resets markers array
 }
 
-// Function to update markers by category
+// Function to load new markers on map by crime category
 function updateMarkersByCategory(category) {
     clearMarkers();
     const filteredCrimes = filterCrimesByCategory(category);
     addCrimeMarkers(filteredCrimes);
     updateCrimeList(filteredCrimes); 
 }
+
+//Function to generate the dropdown options dynamically from the API's crime categories
+function populateCrimeDropdown(crimes) {
+    const dropdown = document.getElementById("crime-type");
+    // Calls categories from the API
+    const uniqueCategories = Array.from(new Set(crimes.map(crime => crime.category)));
+    //Sort categories alphabetically
+    uniqueCategories.sort();
+    // Add an "All" option at the top
+    const allOption = document.createElement("option");
+    allOption.value = "all";
+    allOption.textContent = "All Crime Types";
+    dropdown.appendChild(allOption);
+    // Populate dropdown with unique crime categories
+    const optionsHTML = [...uniqueCategories].map(category => {
+        const formattedCategory = formatCrimeCategory(category);
+        return `<option value="${category}">${formattedCategory}</option>`;
+    }).join("");
+    dropdown.innerHTML += optionsHTML;
+}
+
+//Function to format the crime category for display in the dropdown (removes hyphens and capitalizes)
+function formatCrimeCategory(category) {
+    return category
+        .split("-")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+}
+
+
 
 
 // Function to display most recent date for data in the info div
@@ -201,26 +230,6 @@ function updateCrimeList(crimes) {
 
 
 
-// Function to format the crime category for display
-function formatCrimeCategory(category) {
-       const categoryNames = {
-        "anti-social-behaviour": "Anti-social Behaviour",
-        "bicycle-theft": "Bicycle Theft",
-        "burglary": "Burglary",
-        "criminal-damage-arson": "Criminal Damage & Arson",
-        "drugs": "Drugs",
-        "other-crime": "Other Crime",
-        "other-theft": "Other Theft",
-        "possession-of-weapons": "Possession of Weapons",
-        "public-order": "Public Order",
-        "robbery": "Robbery",
-        "shoplifting": "Shoplifting",
-        "theft-from-the-person": "Theft from the Person",
-        "vehicle-crime": "Vehicle Crime",
-        "violent-crime": "Violent Crime"
-    };
-    return categoryNames[category] || category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ');
-}
 
-//end of document.addEventListener("DOMContentLoaded", function() {
+//end of document.addEventListener("DOMContentLoaded", function() 
 });
