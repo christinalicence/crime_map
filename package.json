@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "jest": "^30.0.4"
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4"
   },
   "name": "crime_map",
   "version": "1.0.0",

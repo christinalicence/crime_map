@@ -12,6 +12,10 @@ const BRIGHTON_LAT = 50.86;
 const BRIGHTON_LNG = -0.16;
 
 //Script to initialize the Leaflet map
+function initMap() {
+    if (map) {
+        map.remove(); // Reset existing map if reinitializing
+    }
 map = L.map("map").setView([BRIGHTON_LAT, BRIGHTON_LNG], 14);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -24,11 +28,11 @@ const tightBounds = L.latLngBounds(
 map.setMaxBounds(tightBounds);
 map.setMinZoom(13);  
 map.setMaxZoom(18);  
-
+}
 
 
 // Function to get the last 3 months date in YYYY-MM format
-function LastMonthDate() {
+function lastMonthDate() {
     const date = new Date();
     date.setMonth(date.getMonth() - 3);//set to 3 months to get more data, data seems to be delayed (so in June, it will fetch April)
     const year = date.getFullYear();
@@ -38,7 +42,7 @@ function LastMonthDate() {
 
 // Fetch crime data
 async function fetchCrimeData() {
-    const lastMonth = LastMonthDate(); 
+    const lastMonth = lastMonthDate(); 
     const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${BRIGHTON_LAT}&lng=${BRIGHTON_LNG}&date=${lastMonth}`;
     
     try {
@@ -113,7 +117,7 @@ async function loadCrimes() {
 loadCrimes();
 displayLastUpdatedDate();
 
-console.log(LastMonthDate());
+console.log(lastMonthDate());
 
 // Dropdown functionality
 
@@ -233,3 +237,16 @@ function updateCrimeList(crimes) {
 
 //end of document.addEventListener("DOMContentLoaded", function() 
 });
+
+
+module.exports = {
+    lastMonthDate,
+    fetchCrimeData,
+    addCrimeMarkers,
+    highlightListedItem,
+    updateCrimeList,
+    populateCrimeDropdown,
+    formatCrimeCategory,
+    displayLastUpdatedDate,
+    updateMarkersByCategory
+};
