@@ -4,6 +4,16 @@
  */
 
 
+beforeEach(() => {
+  // Set up required DOM nodes
+  document.body.innerHTML = `
+    <div id="map"></div>
+    <select id="crime-type"></select>
+    <div class="crime-items"><ul></ul></div>
+    <div id="last-date"></div>
+  `;
+});
+
 const { describe } = require('yargs');
 const  {lastMonthDate,
     fetchCrimeData,
@@ -14,6 +24,42 @@ const  {lastMonthDate,
     formatCrimeCategory,
     displayLastUpdatedDate,
     updateMarkersByCategory} = require('./assets/script.js');
+
+    // script.test.js
+jest.mock('leaflet', () => {
+    return {
+        map: jest.fn(() => ({
+            setView: jest.fn().mockReturnThis(),
+            setMaxBounds: jest.fn(),
+            setMinZoom: jest.fn(),
+            setMaxZoom: jest.fn(),
+            remove: jest.fn()
+        })),
+        tileLayer: jest.fn(() => ({
+            addTo: jest.fn()
+        })),
+        marker: jest.fn(() => ({
+            addTo: jest.fn().mockReturnThis(),
+            bindPopup: jest.fn().mockReturnThis(),
+            on: jest.fn()
+        })),
+        latLngBounds: jest.fn()
+    };
+
+});
+
+
+const { describe } = require('yargs');
+const  {lastMonthDate,
+    fetchCrimeData,
+    addCrimeMarkers,
+    highlightListedItem,
+    updateCrimeList,
+    populateCrimeDropdown,
+    formatCrimeCategory,
+    displayLastUpdatedDate,
+    updateMarkersByCategory} = require('./assets/script.js');
+
 
     describe('Crime Map Script Tests', () => { 
     // Test for lastMonthDate function

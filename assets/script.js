@@ -5,6 +5,10 @@ let crimeIndex = {}; // stores all crimes by a unique id
 
 
 document.addEventListener("DOMContentLoaded", function() {
+   initMap();         // Calling functions to load page inside Domloading
+  loadCrimes();     
+  displayLastUpdatedDate();
+});
    
 
 // Lat and long for North Brighton
@@ -112,10 +116,6 @@ async function loadCrimes() {
         populateCrimeDropdown(crimes); // Populate dropdown with crime categories
     }
 }
-
-// Call the function to load crimes and display the last updated date in info
-loadCrimes();
-displayLastUpdatedDate();
 
 console.log(lastMonthDate());
 
@@ -233,11 +233,7 @@ function updateCrimeList(crimes) {
 }
 
 
-
-
-//end of document.addEventListener("DOMContentLoaded", function() 
-});
-
+// Export functions for testing
 
 module.exports = {
     lastMonthDate,
