@@ -3,11 +3,29 @@ let markers = []; // Declare markers array globally, filled as site runs
 let allCrimes = []; // Declare allCrimes array globally, filled as site runs
 let crimeIndex = {}; // stores all crimes by a unique id
 
+// Function to set up event listeners after the DOM is loaded, before rest of code so testing works
+function setupEventListeners() {
+    const crimeTypeDropdown = document.getElementById("crime-type");
+  if (crimeTypeDropdown) {
+    crimeTypeDropdown.addEventListener("change", function() {
+      const selectedCategory = this.value;
+      updateMarkersByCategory(selectedCategory);
+    });
+  }
+}
+
+// Function to initialize the page
+// This function is called when the DOM is loaded, and it sets up the map, loads crimes, displays the last updated date, and sets up event listeners.
+function setupPage() {
+  initMap();
+  loadCrimes();
+  displayLastUpdatedDate();
+  setupEventListeners();
+}
+
 
 document.addEventListener("DOMContentLoaded", function() {
-   initMap();         // Calling functions to load page inside Domloading
-  loadCrimes();     
-  displayLastUpdatedDate();
+    setupPage(); // Initialize the page when the DOM is fully loaded
 });
    
 
@@ -120,13 +138,6 @@ async function loadCrimes() {
 console.log(lastMonthDate());
 
 // Dropdown functionality
-
-// Function to make the dropdown update the map markers
-document.getElementById("crime-type").addEventListener("change", function() {
-    const selectedCategory = this.value;
-    console.log(`Selected category: ${selectedCategory}`);
-    updateMarkersByCategory(selectedCategory);
-});
 
 // Function to filter crimes by category
 function filterCrimesByCategory(category) {
