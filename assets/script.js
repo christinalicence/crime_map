@@ -245,13 +245,19 @@ function updateCrimeList(crimes) {
 // Export functions for testing
 
 module.exports = {
+    setupEventListeners,
+    setupPage,
+    initMap,
     lastMonthDate,
     fetchCrimeData,
     addCrimeMarkers,
     highlightListedItem,
-    updateCrimeList,
+    loadCrimes,
+    filterCrimesByCategory,
+    clearMarkers,
+    updateMarkersByCategory,
     populateCrimeDropdown,
     formatCrimeCategory,
     displayLastUpdatedDate,
-    updateMarkersByCategory
+    updateCrimeList
 };

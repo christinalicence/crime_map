@@ -14,15 +14,23 @@ beforeEach(() => {
   `;
 });
 
-const  {lastMonthDate,
+const  {
+    setupEventListeners,
+    setupPage,
+    initMap,
+    lastMonthDate,
     fetchCrimeData,
     addCrimeMarkers,
     highlightListedItem,
-    updateCrimeList,
+    loadCrimes,
+    filterCrimesByCategory,
+    clearMarkers,
+    updateMarkersByCategory,
     populateCrimeDropdown,
     formatCrimeCategory,
     displayLastUpdatedDate,
-    updateMarkersByCategory} = require('./assets/script.js');
+    updateCrimeList
+      } = require('./assets/script.js');
 
     // mocks leafket
 jest.mock('leaflet', () => {
@@ -47,12 +55,66 @@ jest.mock('leaflet', () => {
 
 });
 
+    // Test for setupEventListeners function
 
 
+    // Test for setupPage function
 
-    describe('Crime Map Script Tests', () => { 
+
+    // Test for initMap function
+
     // Test for lastMonthDate function
-    test('lastMonthDate returns a date in YYYY-MM format', () => {
-        const date = lastMonthDate();
-        expect(date).toMatch(/^\d{4}-\d{2}$/); // Check if the date is in YYYY-MM format
-    });   });
+    describe('lastMonthDate', () => {
+  test('returns a date in YYYY-MM format', () => {
+    const date = lastMonthDate();
+    expect(date).toMatch(/^\d{4}-\d{2}$/); // YYYY-MM format
+  });
+});
+
+
+    // Test for fetchCrimeData function
+
+
+    // Test for addCrimeMarkers function
+
+
+    // Test for highlightListedItem function
+
+
+
+    // Test for loadCrimes function
+
+
+    // Test for filterCrimesByCategory function
+
+
+    // Test for clearMarkers function
+
+
+    // Test for updateMarkersByCategory function
+
+
+
+    // Test for populateCrimeDropdown function
+
+
+
+    // Test for formatCrimeCategory function
+    test('formatCrimeCategory returns formatted category', () => {
+        const category = 'violent-crime';
+        const formatted = formatCrimeCategory(category);
+        expect(formatted).toBe('Violent Crime');
+    });
+
+
+
+    // Test for displayLastUpdatedDate function
+
+
+
+    // Test for updateCrimeList function
+
+
+
+
+   
