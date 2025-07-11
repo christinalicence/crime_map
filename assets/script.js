@@ -2,6 +2,9 @@ let map; // Declare map variable globally
 let markers = []; // Declare markers array globally, filled as site runs
 let allCrimes = []; // Declare allCrimes array globally, filled as site runs
 let crimeIndex = {}; // stores all crimes by a unique id
+const DEFAULT_ZOOM= 14; // Default zoom level for the map
+const BRIGHTON_LAT = 50.86; // Lat and long for North Brighton
+const BRIGHTON_LNG = -0.16;
 
 // Function to set up event listeners after the DOM is loaded, before rest of code so testing works
 function setupEventListeners() {
@@ -28,10 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
     setupPage(); // Initialize the page when the DOM is fully loaded
 });
    
-
-// Lat and long for North Brighton
-const BRIGHTON_LAT = 50.86;
-const BRIGHTON_LNG = -0.16;
 
 //Script to initialize the Leaflet map
 function initMap() {
@@ -135,8 +134,6 @@ async function loadCrimes() {
     }
 }
 
-console.log(lastMonthDate());
-
 // Dropdown functionality
 
 // Function to filter crimes by category
@@ -159,6 +156,7 @@ function clearMarkers() {
 function updateMarkersByCategory(category) {
     clearMarkers();
     const filteredCrimes = filterCrimesByCategory(category);
+    map.setView([BRIGHTON_LAT, BRIGHTON_LNG], DEFAULT_ZOOM);
     addCrimeMarkers(filteredCrimes);
     updateCrimeList(filteredCrimes); 
 }
