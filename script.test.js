@@ -14,7 +14,6 @@ beforeEach(() => {
   `;
 });
 
-const { describe } = require('yargs');
 const  {lastMonthDate,
     fetchCrimeData,
     addCrimeMarkers,
@@ -25,7 +24,7 @@ const  {lastMonthDate,
     displayLastUpdatedDate,
     updateMarkersByCategory} = require('./assets/script.js');
 
-    // script.test.js
+    // mocks leafket
 jest.mock('leaflet', () => {
     return {
         map: jest.fn(() => ({
@@ -49,16 +48,6 @@ jest.mock('leaflet', () => {
 });
 
 
-const { describe } = require('yargs');
-const  {lastMonthDate,
-    fetchCrimeData,
-    addCrimeMarkers,
-    highlightListedItem,
-    updateCrimeList,
-    populateCrimeDropdown,
-    formatCrimeCategory,
-    displayLastUpdatedDate,
-    updateMarkersByCategory} = require('./assets/script.js');
 
 
     describe('Crime Map Script Tests', () => { 
