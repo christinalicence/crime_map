@@ -125,14 +125,20 @@ function highlightListedItem(listItem) {
 
 // Load and display crimes
 async function loadCrimes() {
+  try {
     const crimes = await fetchCrimeData();
     if (crimes) {
-        allCrimes = crimes; 
-        addCrimeMarkers(crimes);
-        updateCrimeList(crimes);
-        populateCrimeDropdown(crimes); // Populate dropdown with crime categories
+      allCrimes = crimes;
+      addCrimeMarkers(crimes);
+      updateCrimeList(crimes);
+      populateCrimeDropdown(crimes);
     }
+  } catch (error) {
+    console.error('Failed to load crimes:', error);
+    displayErrorMessage('Sorry, something went wrong while loading crime data. Please try again later.');
+  }
 }
+
 
 // Dropdown functionality
 
@@ -242,6 +248,16 @@ function updateCrimeList(crimes) {
 }
 
 
+//Function to display error message
+
+function displayErrorMessage(message) {
+    const errorMessageDiv = document.getElementById("error-message");
+    if (errorMessageDiv) {
+        errorMessageDiv.innerHTML = `<p>${message}</p>`;
+        errorMessageDiv.style.display = "block"; // Show the error message
+    }
+}
+
 // Export functions for testing
 
 module.exports = {
@@ -259,5 +275,6 @@ module.exports = {
     populateCrimeDropdown,
     formatCrimeCategory,
     displayLastUpdatedDate,
-    updateCrimeList
+    updateCrimeList,
+    displayErrorMessage
 };

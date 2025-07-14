@@ -29,7 +29,8 @@ const  {
     populateCrimeDropdown,
     formatCrimeCategory,
     displayLastUpdatedDate,
-    updateCrimeList
+    updateCrimeList,
+    displayErrorMessage
       } = require('./assets/script.js');
 
 
