@@ -73,6 +73,8 @@ async function fetchCrimeData() {
         return data;
     } catch (error) {
         console.error("Error fetching data:", error);
+        displayErrorMessage('Sorry, something went wrong while fetching crime data. Please try again later.');
+        return []; // Return an empty array if there's an error
     }
 }
 

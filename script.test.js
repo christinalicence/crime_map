@@ -14,6 +14,7 @@ beforeEach(() => {
   `;
 });
 
+const { describe } = require('yargs');
 const  {
     setupEventListeners,
     setupPage,
@@ -142,5 +143,19 @@ jest.mock('leaflet', () => {
 
 
 
+    // Test for displayErrorMessage function
+   describe('displayErrorMessage', () => {  
+    test("displays an error message in the error-message div", () => {
+        const errorDiv = document.createElement("div");
+        errorDiv.id = "error-message";
+        document.body.appendChild(errorDiv);
 
-   
+        const message = "An error occurred while loading data.";
+        displayErrorMessage(message);
+        expect(errorDiv.innerHTML).toBe(`<p>${message}</p>`);
+        expect(errorDiv.style.display).toBe("block"); // Check if the error message is displayed
+    });
+  });   
+
+
+      
