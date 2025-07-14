@@ -32,6 +32,7 @@ const  {
     updateCrimeList
       } = require('./assets/script.js');
 
+
     // mocks leafket
 jest.mock('leaflet', () => {
     return {
@@ -79,9 +80,33 @@ jest.mock('leaflet', () => {
 
 
     // Test for highlightListedItem function
+   describe('highlightListedItem', () => {
+  test('highlights the correct list item and removes highlight from others', () => {
+    const ul = document.querySelector('.crime-items ul');
 
+    const listItem1 = document.createElement('li');
+    listItem1.textContent = 'Crime 1';
+    listItem1.classList.add('highlight');
 
+    const listItem2 = document.createElement('li');
+    listItem2.textContent = 'Crime 2';
+    listItem2.scrollIntoView = jest.fn(); // Spy on scrollIntoView
 
+    ul.appendChild(listItem1);
+    ul.appendChild(listItem2);
+
+    highlightListedItem(listItem2);
+
+    expect(listItem1.classList.contains('highlight')).toBe(false);
+    expect(listItem2.classList.contains('highlight')).toBe(true);
+    expect(listItem2.scrollIntoView).toHaveBeenCalledWith({
+      behavior: 'smooth',
+      block: 'center',
+    });
+  });
+});
+    
+    
     // Test for loadCrimes function
 
 
