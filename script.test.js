@@ -14,7 +14,7 @@ beforeEach(() => {
   `;
 });
 
-const { describe } = require('yargs');
+
 const  {
     setupEventListeners,
     setupPage,

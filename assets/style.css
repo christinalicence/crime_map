@@ -45,9 +45,15 @@ body {
 
 
 /* Dropdown and Info Styles */
+#crimes-percentage {
+  margin: 20px;
+  padding: 10px;
+
+
+
 #dropdown {
   width: 90%;
-  margin-top: 10px;
+  margin: 10px;
   padding: 10px;
 }
 
@@ -77,8 +83,9 @@ body {
 }
 
 #error-message {
-  background-color: #333;
-  color: #fff;
+  background-color: red;
+  color: black;
+  font-weight: bold;
   padding: 10px;
   text-align: center;
   position: fixed;
