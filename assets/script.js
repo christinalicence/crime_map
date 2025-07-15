@@ -268,7 +268,7 @@ function displayTopCrimes(crimes) {
             .sort((a, b) => b[1] - a[1])
             .slice(0, 3);
         // Reset the innerHTML of the crimes-percentage div
-        const crimePercentageDiv = document.getElementById("crimes-percentage");
+        const crimePercentageDiv = document.getElementById("highest-crimes-list");
         crimePercentageDiv.innerHTML = ""; // Clear existing content
         // Create a list to display the top 3 crimes and their percentages
         topCategories.forEach(([category, count]) => {
@@ -309,5 +309,6 @@ module.exports = {
     formatCrimeCategory,
     displayLastUpdatedDate,
     updateCrimeList,
-    displayErrorMessage
+    displayErrorMessage,
+    displayTopCrimes
 };

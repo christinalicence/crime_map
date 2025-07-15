@@ -31,7 +31,8 @@ const  {
     formatCrimeCategory,
     displayLastUpdatedDate,
     updateCrimeList,
-    displayErrorMessage
+    displayErrorMessage,
+    displayTopCrimes
       } = require('./assets/script.js');
 
 
