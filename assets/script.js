@@ -2,9 +2,10 @@ let map; // Declare map variable globally
 let markers = []; // Declare markers array globally, filled as site runs
 let allCrimes = []; // Declare allCrimes array globally, filled as site runs
 let crimeIndex = {}; // stores all crimes by a unique id
-const DEFAULT_ZOOM= 14; // Default zoom level for the map
-const BRIGHTON_LAT = 50.86; // Lat and long for North Brighton
-const BRIGHTON_LNG = -0.16;
+const DEFAULT_ZOOM = 6;  // Wide UK view zoom level
+const UK_CENTER_LAT = 54.5;
+const UK_CENTER_LNG = -2.0;
+const AREA_ZOOM = 14;  // Zoom level when viewing specific area
 
 // Function to set up event listeners after the DOM is loaded, before rest of code so testing works
 function setupEventListeners() {
@@ -37,20 +38,17 @@ function initMap() {
     if (map) {
         map.remove(); // Reset existing map if reinitializing
     }
-map = L.map("map").setView([BRIGHTON_LAT, BRIGHTON_LNG], 14);
+map = L.map("map").setView([UK_CENTER_LAT, UK_CENTER_LNG], DEFAULT_ZOOM);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-// Set the map bounds to stop people scrolling away 
-const tightBounds = L.latLngBounds(
-    [50.82, -0.20],  
-    [50.88, -0.10]   
-);
-map.setMaxBounds(tightBounds);
-map.setMinZoom(13);  
-map.setMaxZoom(18);  
+//Click handler
+map.on("click", function(e) {
+    const lat = e.latlng.lat;
+    const lng = e.latlng.lng;
+    loadCrimesForArea(lat, lng);
+});
 }
-
 
 // Function to get the last 3 months date in YYYY-MM format
 function lastMonthDate() {
@@ -126,11 +124,17 @@ function highlightListedItem(listItem) {
 }
 
 // Load and display crimes
-async function loadCrimes() {
+async function loadCrimesForArea(lat, lng) {
   try {
-    const crimes = await fetchCrimeData();
-    if (crimes) {
+    // Clear existing markers and crime data
+    clearMarkers();
+    const lastMonth = lastMonthDate();
+    const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${lat}&lng=${lng}&date=${lastMonth}`;
+    const response = await fetch(url);
+    const crimes = await response.json();
+    if (crimes && crimes.length > 0 ) {
       allCrimes = crimes;
+      map.setView([lat, lng], AREA_ZOOM); // Zoom in on the clicked area
       addCrimeMarkers(crimes);
       updateCrimeList(crimes);
       populateCrimeDropdown(crimes);
