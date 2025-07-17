@@ -16,13 +16,32 @@ function setupEventListeners() {
       updateMarkersByCategory(selectedCategory);
     });
   }
+  const searchButton = document.getElementById("search-button");
+  const postcodeInput = document.getElementById("postcode-search");
+  if (searchButton && postcodeInput) {
+    searchButton.addEventListener("click", () => {
+      const postcode = postcodeInput.value.trim().toUpperCase(); // Convert postcode to uppercase for consistency
+      if (postcode) {
+        searchPostcode(postcode);
+      } else {
+        displayErrorMessage('Please enter a valid postcode.');
+      }
+    });
+    postcodeInput.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        const postcode = postcodeInput.value.trim().toUpperCase(); // Convert postcode to uppercase for consistency
+        if (postcode) {
+          searchPostcode(postcode);
+        }
+    }
+    });
+  }
 }
 
 // Function to initialize the page
 // This function is called when the DOM is loaded, and it sets up the map, loads crimes, displays the last updated date, and sets up event listeners.
 function setupPage() {
   initMap();
-  loadCrimes();
   displayLastUpdatedDate();
   setupEventListeners();
 }
@@ -169,9 +188,12 @@ function clearMarkers() {
 function updateMarkersByCategory(category) {
     clearMarkers();
     const filteredCrimes = filterCrimesByCategory(category);
-    map.setView([BRIGHTON_LAT, BRIGHTON_LNG], DEFAULT_ZOOM);
-    addCrimeMarkers(filteredCrimes);
-    updateCrimeList(filteredCrimes); 
+    //reset markers and call them in the location
+    if (allCrimes.length > 0) {
+        addCrimeMarkers(filteredCrimes);
+        updateCrimeList(filteredCrimes);
+        displayTopCrimes(filteredCrimes);
+    }
 }
 
 //Function to generate the dropdown options dynamically from the API's crime categories
