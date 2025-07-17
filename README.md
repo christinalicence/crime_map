@@ -55,6 +55,31 @@ A car owner wants to know if it is safe to park their car in an area.
     - They need to be able to filter vehicle crime and see how common it is in an area.
 
 
+### Wireframes
+
+### Colour Scheme
+
+### Fonts
+
+Nunito sans from Google Fonts is used to give a clean look that is easy to read.
+
+### Features
+
+#### Map
+
+The webiste uses Leaflet maps to generate a map with markers in the locations where crimes hav occured.
+
+#### Postcode Search
+
+You can search using a UK postcode to find an area you want.
+
+#### Dropdown to filter crime types
+
+There is a dropdown menu that allows you to filter the crime types to only the ones you are interested in searching.
+
+#### There is a box showing the top 3 crimes in your selected area and the percentage of those crimes.
+
+
 ### 3. Technologies Used
 The website is built using HTML, CSS and javascript.
 
