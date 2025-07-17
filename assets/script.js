@@ -147,7 +147,7 @@ async function loadCrimesForArea(lat, lng) {
 }
 
 
-// Dropdown functionality
+// Dropdown crime filter functionality
 
 // Function to filter crimes by category
 function filterCrimesByCategory(category) {
@@ -283,6 +283,24 @@ function displayTopCrimes(crimes) {
             crimePercentageDiv.appendChild(listItem);
         });
     }
+
+// Function to make postcode search work
+async function searchPostcode(postcode) {
+    try {
+        const response = await fetch(`https://api.postcodes.io/postcodes/${postcode}`);
+        if (!response.ok) {
+            throw new Error('Postcode not found');
+        }
+        const data = await response.json();
+        const { latitude, longitude } = data.result;
+        loadCrimesForArea(latitude, longitude);
+    } catch (error) {
+        console.error('Error fetching postcode:', error);
+        displayErrorMessage('Invalid postcode. Please try again.');
+    }
+}
+
+
 
 
 //Function to display error message
