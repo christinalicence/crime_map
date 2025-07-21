@@ -14,7 +14,7 @@
     
 </head>
 <body>
-    <h1 id="title">Crime Map of North Brighton</h1>
+    <h1 id="title">Crime Map of the UK</h1>
     <div id="main-container">
       <div id="sidebar-container">
         <div id="sidebar">
@@ -24,37 +24,29 @@
             <button id="search-button">Search</button>
             </div>
             <div id="crimes-percentage">
-            <h2 class="sub-heading">What is Most Common in my Area?</h2>
-            <ul id="highest-crimes-list"></ul>
+                    <h2 class="sub-heading">Most Common Crimes</h2>
+                    <ul id="highest-crimes-list">
+                        <li>Click on the map or search for a postcode to view crime data</li>
+                    </ul>
+                </div>
+                
+                <h2 class="sub-heading">Crime Filter</h2>
+                <div id="dropdown">
+                    <label for="crime-type">Select Crime Type:</label>
+                    <select id="crime-type">
+                        <option value="all">All Crimes</option>
+                    </select>
+                </div>
+                
+                <h2 class="sub-heading">Crimes in This Area</h2>
+                <div id="crime-list">
+                    <ul class="crime-items">
+                        <li>No crimes loaded yet. Click on the map or search for a location.</li>
+                    </ul>
+                </div>
             </div>
-            <h2 class="sub-heading">What Crimes have Happened in my Area?</h2>
         </div>
-        <div id="dropdown">
-         <label for="crime-type">Select Crime Type:</label>
-        <select id="crime-type">
-            <option value="all">All Crimes</option>
-            <option value="anti-social-behaviour">Anti-social Behaviour</option>
-            <option value="bicycle-theft">Bicycle Theft</option>
-            <option value="burglary">Burglary</option>
-            <option value="criminal-damage-arson">Criminal Damage & Arson</option>
-            <option value="drugs">Drugs</option>
-            <option value="other-crime">Other Crime</option>
-            <option value="other-theft">Other Theft</option>
-            <option value="possession-of-weapons">Possession of Weapons</option>
-            <option value="public-order">Public Order</option>
-            <option value="robbery">Robbery</option>
-            <option value="shoplifting">Shoplifting</option>
-            <option value="theft-from-the-person">Theft from the Person</option>
-            <option value="vehicle-crime">Vehicle Crime</option>
-            <option value="violent-crime">Violent Crime</option>
-        </select>
-
-        <div id="crime-list">
-            <ul class="crime-items">
-            </ul>
-        </div>
-        </div>
-      </div>
+        
       <div id="map-container">
       <div id="map"></div>
     

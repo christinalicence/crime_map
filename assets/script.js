@@ -78,10 +78,10 @@ function lastMonthDate() {
     return `${year}-${month}`;
 }
 
-// Fetch crime data
+// Fetch crime data from API
 async function fetchCrimeData() {
     const lastMonth = lastMonthDate(); 
-    const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${BRIGHTON_LAT}&lng=${BRIGHTON_LNG}&date=${lastMonth}`;
+    const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${UK_CENTER_LAT}&lng=${UK_CENTER_LNG}&date=${lastMonth}`;
     
     try {
         const response = await fetch(url);
@@ -213,7 +213,7 @@ function populateCrimeDropdown(crimes) {
         const formattedCategory = formatCrimeCategory(category);
         return `<option value="${category}">${formattedCategory}</option>`;
     }).join("");
-    dropdown.innerHTML += optionsHTML;
+    dropdown.innerHTML = optionsHTML;
 }
 
 //Function to format the crime category for display in the dropdown (removes hyphens and capitalizes)
@@ -268,7 +268,7 @@ function updateCrimeList(crimes) {
             const crimeId = this.dataset.crimeId;
             const crimeData = crimeIndex[crimeId]; // Get the crime data from the index
             if (crimeData && crimeData._marker) {
-                map.setView(crimeData._marker.getLatLng(), 15.5); // Zoom in on the marker
+                map.setView(crimeData._marker.getLatLng(),);
                 crimeData._marker.openPopup(); // Open the popup for the marker
                 highlightListedItem(this); // Highlight the clicked list item
             }
@@ -306,7 +306,7 @@ function displayTopCrimes(crimes) {
         });
     }
 
-// Function to make postcode search work
+// Function to make postcode search work, use postcodes.io API to get lat/lng from postcode
 async function searchPostcode(postcode) {
     try {
         const response = await fetch(`https://api.postcodes.io/postcodes/${postcode}`);
