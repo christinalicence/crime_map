@@ -78,23 +78,6 @@ function lastMonthDate() {
     return `${year}-${month}`;
 }
 
-// Fetch crime data from API
-async function fetchCrimeData() {
-    const lastMonth = lastMonthDate(); 
-    const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${UK_CENTER_LAT}&lng=${UK_CENTER_LNG}&date=${lastMonth}`;
-    
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(`Found ${data.length} crimes`);
-        return data;
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        displayErrorMessage('Sorry, something went wrong while fetching crime data. Please try again later.');
-        return []; // Return an empty array if there's an error
-    }
-}
-
 // Function to add markers to the map
 function addCrimeMarkers(crimes) {
     crimes.forEach(crime => {

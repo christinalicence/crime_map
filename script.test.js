@@ -20,7 +20,6 @@ const  {
     setupPage,
     initMap,
     lastMonthDate,
-    fetchCrimeData,
     addCrimeMarkers,
     highlightListedItem,
     loadCrimes,
