@@ -16,6 +16,7 @@ body {
 #map-container {
   flex: 1;
   flex-shrink: 0;
+  position: relative; /* so reload button can be positioned */
 }
 
 #sidebar-container {
@@ -88,6 +89,24 @@ body {
   transition: background-color 0.5s ease;
 }
 
+/* Button Styles */
+#reload-button {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#reload-button:hover {
+  background-color: black
+}
+
+
 #error-message {
   background-color: red;
   color: black;
@@ -101,4 +120,5 @@ body {
   z-index: 2;
   display: none; /* Hidden by default */
 }
+
 

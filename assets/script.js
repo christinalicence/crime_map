@@ -305,6 +305,32 @@ async function searchPostcode(postcode) {
     }
 }
 
+// Function to reload crimes in the current map view
+
+async function reloadCrimesInView() {
+    if (!map) return; // Ensure map is initialized
+    const bounds = map.getBounds();
+    const center = map.getCenter();
+    const lastMonth = lastMonthDate();
+
+    try {
+        const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${center.lat}&lng=${center.lng}&date=${lastMonth}`;
+        const response = await fetch(url);
+        const crimes = await response.json();
+        if (crimes && crimes.length > 0) {
+            clearMarkers();
+            addCrimeMarkers(crimes);
+            updateCrimeList(crimes);
+            populateCrimeDropdown(crimes);
+            displayTopCrimes(crimes);
+        } else {
+            displayErrorMessage('No crimes found in the current view.');
+        }
+    } catch (error) {
+        console.error('Failed to reload crimes:', error);
+        displayErrorMessage('Sorry, something went wrong while reloading crime data. Please try again later.');
+    }
+}
 
 
 
@@ -325,7 +351,6 @@ module.exports = {
     setupPage,
     initMap,
     lastMonthDate,
-    fetchCrimeData,
     addCrimeMarkers,
     highlightListedItem,
     loadCrimes,
