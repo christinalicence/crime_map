@@ -10,20 +10,19 @@
      crossorigin=""/>
     <!-- Link to custom CSS -->
     <link rel="stylesheet" href="assets/style.css">
-    
-    
 </head>
+
 <body>
     <h1 id="title">Crime Map of the UK</h1>
     <div id="main-container">
-      <div id="sidebar-container">
-        <div id="sidebar">
-            <div id="search-container">
-            <h2 class="sub-heading">Search for a Location</h2>
-            <input type="text" id="postcode-search" placeholder="Enter a postcode...">
-            <button id="search-button">Search</button>
-            </div>
-            <div id="crimes-percentage">
+        <div id="sidebar-container">
+            <div id="sidebar">
+                <div id="search-container">
+                    <h2 class="sub-heading">Search for a Location</h2>
+                    <input type="text" id="postcode-search" placeholder="Enter a postcode...">
+                    <button id="search-button">Search</button>
+                </div>
+                <div id="crimes-percentage">
                     <h2 class="sub-heading">Most Common Crimes</h2>
                     <ul id="highest-crimes-list">
                         <li>Click on the map or search for a postcode to view crime data</li>
@@ -44,25 +43,24 @@
                         <li>No crimes loaded yet. Click on the map or search for a location.</li>
                     </ul>
                 </div>
+                
+                <div id="info">
+                    <p>Data is from the last 3 months, updated when the Police release new data. The most recent update is from <span id="last-date"></span></p>
+                </div>
             </div>
         </div>
         
-      <div id="map-container">
-      <div id="map">
-        <button id="reload-button">Reload Crimes in View</button>
-      </div>
-
-    
-    
-    <div id="info">
-        <p>Data is from the last 3 months, updated when the Police release new data. The most recent update is from <span id="last-date"></span></p>
-    </div>
+        <div id="map-container">
+            <div id="map"></div>
+            <button id="reload-button">Reload Crimes in View</button>
         </div>
     </div>
+    
     <div id="error-message">
         <p>There was an error loading the crime data. Please try again later.</p>
     </div>
     
+
 
     <!-- Link to Leaflet JavaScript -->
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

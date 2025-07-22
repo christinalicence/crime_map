@@ -27,15 +27,20 @@ function setupEventListeners() {
         displayErrorMessage('Please enter a valid postcode.');
       }
     });
-    postcodeInput.addEventListener("keypress", (event) => {
-      if (event.key === "Enter") {
-        const postcode = postcodeInput.value.trim().toUpperCase(); // Convert postcode to uppercase for consistency
-        if (postcode) {
-          searchPostcode(postcode);
-        }
+     postcodeInput.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                const postcode = postcodeInput.value.trim().toUpperCase();
+                if (postcode) {
+                    searchPostcode(postcode);
+                }
+            }
+        }); 
+    } 
+    // Reload button 
+    const reloadButton = document.getElementById("reload-button");
+    if (reloadButton) {
+        reloadButton.addEventListener("click", reloadCrimesInView);
     }
-    });
-  }
 }
 
 // Function to initialize the page
@@ -65,6 +70,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 map.on("click", function(e) {
     const lat = e.latlng.lat;
     const lng = e.latlng.lng;
+    map.setView([lat, lng], AREA_ZOOM); // Force zoom to 14
     loadCrimesForArea(lat, lng);
 });
 }
@@ -165,6 +171,7 @@ function filterCrimesByCategory(category) {
 function clearMarkers() {
     markers.forEach(marker => map.removeLayer(marker));
     markers = []; // Resets markers array
+    crimeIndex = {}; // Reset crime index to help with memory management
 }
 
 // Function to load new markers on map by crime category
@@ -186,18 +193,22 @@ function populateCrimeDropdown(crimes) {
     const uniqueCategories = Array.from(new Set(crimes.map(crime => crime.category)));
     //Sort categories alphabetically
     uniqueCategories.sort();
+    // Clear existing options
+    dropdown.innerHTML = "";
     // Add an "All" option at the top
     const allOption = document.createElement("option");
     allOption.value = "all";
     allOption.textContent = "All Crime Types";
     dropdown.appendChild(allOption);
-    // Populate dropdown with unique crime categories
-    const optionsHTML = [...uniqueCategories].map(category => {
-        const formattedCategory = formatCrimeCategory(category);
-        return `<option value="${category}">${formattedCategory}</option>`;
-    }).join("");
-    dropdown.innerHTML = optionsHTML;
+    // Add other categories
+    uniqueCategories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = formatCrimeCategory(category);
+        dropdown.appendChild(option);
+    });
 }
+
 
 //Function to format the crime category for display in the dropdown (removes hyphens and capitalizes)
 function formatCrimeCategory(category) {
@@ -309,15 +320,22 @@ async function searchPostcode(postcode) {
 
 async function reloadCrimesInView() {
     if (!map) return; // Ensure map is initialized
-    const bounds = map.getBounds();
-    const center = map.getCenter();
-    const lastMonth = lastMonthDate();
+        const zoom = map.getZoom();
+        const center = map.getCenter();
+        const lastMonth = lastMonthDate();
+
+      // If zoomed out too far or no previous area selected
+    if (zoom < AREA_ZOOM) {
+        displayErrorMessage("Please zoom in or choose a location to search for crimes.");
+        return;
+    }
 
     try {
         const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${center.lat}&lng=${center.lng}&date=${lastMonth}`;
         const response = await fetch(url);
         const crimes = await response.json();
         if (crimes && crimes.length > 0) {
+            allCrimes = crimes; // Update allCrimes with the new data
             clearMarkers();
             addCrimeMarkers(crimes);
             updateCrimeList(crimes);
@@ -341,6 +359,10 @@ function displayErrorMessage(message) {
     if (errorMessageDiv) {
         errorMessageDiv.innerHTML = `<p>${message}</p>`;
         errorMessageDiv.style.display = "block"; // Show the error message
+ // Auto-hide after 5 seconds
+        setTimeout(() => {
+            errorMessageDiv.style.display = "none";
+        }, 5000);
     }
 }
 
