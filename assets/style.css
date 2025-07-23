@@ -1,33 +1,54 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Macondo&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* CSS variables */
+:root {
+  --primary-color: #2C3E50;
+  --secondary-color: #2980B9;
+  --background-color: #F4F6F8;
+  --highlight-color: #ECF0F1;
+  --error-color: #E74C3C;
+  --text-color: #333;
+}
+
+/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
 /* General Styles */
 body {
   font-family: 'Nunito Sans', sans-serif;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--background-colour);
+  color: var(--text-color);
 }
 
+
+/* Main Layout */
 #main-container {
   display: flex;
-  height: 100vh;
-}
-
-#map-container {
-  flex: 1;
-  flex-shrink: 0;
-  position: relative; /* so reload button can be positioned */
+  height: calc(100vh - 80px);
+  margin: 20px;
+  gap: 20px;
 }
 
 #sidebar-container {
   width: 35%;
   padding: 20px;
-  background-color: #fff;
+  background-color: white;
   overflow-y: auto;
-  border: 2px solid #ccc;
+}
+/* Map */
+#map-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background-color: white;
 }
 
-/*Leaflet Map CSS*/
 #map { 
   height: 100%;
   width: 100%;
@@ -39,21 +60,31 @@ body {
   text-align: center;
   font-size: 3.5em;
   margin-top: 20px;
-  color: #333;
+  color: var(--primary-color);
 }
 
 .sub-heading {
   font-size: 1.5em;
-  margin: 20px;
+  margin: 20px 0 10px;
   text-align: left;
-  color: #555;
+  color: var(--primary-color);
 }
 
 
-/* Dropdown and Info Styles */
+/* Sidebar Content Styles */
+
+#postcode-search {
+  width: 90%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  border: 1px solid var(--primary-color);
+}
+
 
 #highest-crimes-list {
   list-style-type: none;
+  background-color: var(--highlight-color);
 }
 
 #dropdown {
@@ -63,9 +94,7 @@ body {
 }
 
 #info {
-  text-align: center;
-  width: 100%;
-  margin: 30px;
+  text-align: left;
   padding: 10px;
 }
 
@@ -83,19 +112,19 @@ body {
 }
 
 .highlight {
-  background-color: pink;
+  background-color: var(--highlight-color);
   transition: background-color 0.5s ease;
 }
 
 /* Button Styles */
 #reload-button {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 10px;
+  left: 10px;
   z-index: 1000;
   padding: 10px 20px;
-  background-color: #333;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--background-colour);
   border: none;
   cursor: pointer;
 }
@@ -106,15 +135,15 @@ body {
 
 
 #error-message {
-  background-color: rgb(212, 255, 0);
-  color: black;
+  background-color: var(--warning-color);
+  color: var(--primary-color);
   font-weight: bold;
   padding: 10px;
   text-align: center;
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 50%;
+  left: 25%;
+  right: 25%;
   z-index: 999;
   display: none; /* Hidden by default */
 }
