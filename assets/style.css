@@ -31,7 +31,7 @@ body {
 /* Main Layout */
 #main-container {
   display: flex;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 85px);
   margin: 20px;
   gap: 20px;
 }
@@ -57,12 +57,14 @@ body {
 
 /* Title Style */
 
-#title {
+ #title {
   text-align: center;
-  font-size: 18.rem;
-  margin-top: 20px;
+  font-size: 2.5rem;
+  padding: 15px 0;
   color: var(--primary-color);
-}
+  margin: 0;
+  font-weight: 700;
+        }
 
 .sub-heading {
   font-size: 1.5em;
@@ -115,12 +117,6 @@ body {
   border: 0.5px solid var(--primary-color);
 }
 
-/* Dropdown Styles */
-
-#dropdown {
-  margin-top: 10px;
-}
-
 /* Info Section Styles */
 #info {
   text-align: left;
@@ -129,20 +125,33 @@ body {
 }
 
 
-/* Crime List */
-#crime-list,
-#highest-crimes-list {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 10px;
+ /* Crime List */
+ #crime-list {
+  flex: 1;
+  min-height: 0;
 }
 
-.crime-items li,
-#highest-crimes-list li {
-  list-style: none;
-  margin-top: 10px;
+.crime-items {
+  list-style-type: none;
   padding: 0;
-} 
+  overflow-y: auto;
+  flex: 1;
+  max-height: 200px;
+}
+
+.crime-items li {
+  list-style: none;
+  margin-bottom: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.2s ease;
+}
+
+.crime-items li:hover {
+  background-color: var(--highlight-color);
+}
+
 
 /* Highlight for filter match */
 .highlight {
@@ -161,6 +170,7 @@ body {
   color: var(--background-color);
   border: none;
   cursor: pointer;
+  font-weight: bold;
 }
 
 #reload-button:hover {
