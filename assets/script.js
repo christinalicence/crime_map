@@ -62,10 +62,19 @@ function initMap() {
     if (map) {
         map.remove(); // Reset existing map if reinitializing
     }
-map = L.map("map").setView([UK_CENTER_LAT, UK_CENTER_LNG], DEFAULT_ZOOM);
+map = L.map("map", {
+            zoomControl: true,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            touchZoom: false,
+            boxZoom: false,
+            keyboard: false,
+            dragging: true
+        }).setView([UK_CENTER_LAT, UK_CENTER_LNG], DEFAULT_ZOOM);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
 //Click handler
 map.on("click", function(e) {
     const lat = e.latlng.lat;
@@ -136,6 +145,8 @@ async function loadCrimesForArea(lat, lng) {
   try {
     // Clear existing markers and crime data
     clearMarkers();
+    // Scroll sidebar back to top
+    document.getElementById('sidebar-container').scrollTop = 0;
     const lastMonth = lastMonthDate();
     const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${lat}&lng=${lng}&date=${lastMonth}`;
     const response = await fetch(url);
@@ -331,11 +342,12 @@ async function reloadCrimesInView() {
     }
 
     try {
+        // Scroll sidebar back to top
+        document.getElementById('sidebar-container').scrollTop = 0;
         const url = `https://data.police.uk/api/crimes-street/all-crime?lat=${center.lat}&lng=${center.lng}&date=${lastMonth}`;
         const response = await fetch(url);
         const crimes = await response.json();
         if (crimes && crimes.length > 0) {
-            allCrimes = crimes; // Update allCrimes with the new data
             clearMarkers();
             addCrimeMarkers(crimes);
             updateCrimeList(crimes);
