@@ -22,7 +22,7 @@
 /* General Styles */
 body {
   font-family: 'Nunito Sans', sans-serif;
-  background-color: var(--background-colour);
+  background-color: var(--background-color);
   color: var(--text-color);
 }
 
@@ -58,7 +58,7 @@ body {
 
 #title {
   text-align: center;
-  font-size: 3.5em;
+  font-size: 3em;
   margin-top: 20px;
   color: var(--primary-color);
 }
@@ -71,7 +71,7 @@ body {
 }
 
 
-/* Sidebar Content Styles */
+/* postcode search styles */
 
 #postcode-search {
   width: 90%;
@@ -81,42 +81,75 @@ body {
   border: 1px solid var(--primary-color);
 }
 
+#postcode-search:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
+
+#search-button {
+  width: 90%;
+  padding: 10px;
+  font-weight: bold;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: var(--background-color) 0.3s ease;
+}
+
+#search-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Most Common Crimes Styles */
 
 #highest-crimes-list {
   list-style-type: none;
-  background-color: var(--highlight-color);
+  padding: 0;
+  margin-top: 10px;
 }
+
+#highest-crimes-list li {
+  padding: 10px;
+  border: 0.5px solid var(--primary-color);
+}
+
+/* Dropdown Styles */
 
 #dropdown {
-  width: 90%;
-  margin: 10px;
-  padding: 10px;
+  margin-top: 10px;
 }
 
+/* Info Section Styles */
 #info {
   text-align: left;
-  padding: 10px;
+  padding: 0;
+  margin-top: 20px;
 }
 
-/* Crime List Styles */
 
-#crime-list {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-}
-
-.crime-items {
+/* Crime List */
+#crime-list,
+#highest-crimes-list {
   list-style-type: none;
   padding: 0;
+  margin-top: 10px;
 }
 
+.crime-items li,
+#highest-crimes-list li {
+  list-style: none;
+  margin-top: 10px;
+  padding: 0;
+} 
+
+/* Highlight for filter match */
 .highlight {
-  background-color: var(--highlight-color);
+  background-color: #ffeaa7;
   transition: background-color 0.5s ease;
 }
 
-/* Button Styles */
+/*  Reload Button Styles */
 #reload-button {
   position: absolute;
   bottom: 10px;
@@ -124,18 +157,18 @@ body {
   z-index: 1000;
   padding: 10px 20px;
   background-color: var(--primary-color);
-  color: var(--background-colour);
+  color: var(--background-color);
   border: none;
   cursor: pointer;
 }
 
 #reload-button:hover {
-  background-color: black
+  background-color: var(--secondary-color);
 }
 
 
 #error-message {
-  background-color: var(--warning-color);
+  background-color: var(--error-color);
   color: var(--primary-color);
   font-weight: bold;
   padding: 10px;
