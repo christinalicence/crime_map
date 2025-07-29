@@ -53,6 +53,7 @@ body {
 #map { 
   height: 100%;
   width: 100%;
+  min-height: 400px; /* Ensure map for mob devices, so it appears */
 }
 
 /* Title Style */
@@ -193,4 +194,50 @@ body {
   display: none; /* Hidden by default */
 }
 
+/* Responsive Styles */
+@media (max-width: 768px) {
+  #main-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  #sidebar-container {
+    width: 100%;
+    padding: 10px;
+    order: 2;
+  }
+
+  #map-container {
+    height: 60vh;
+    order: 1;
+    width: 100%;
+  }
+
+   #map {
+    height: 100%; /* ensure map fills the container and appears*/
+    width: 100%;
+  }
+
+  #title {
+    font-size: 1.8rem;
+  }
+
+  .sub-heading {
+    font-size: 1.2em;
+  }
+  #postcode-search {
+    width: 100%;
+  }
+  #search-button {
+    width: 100%;
+  }
+
+  #error-message {
+    font-size: 14px;
+    padding: 10px 15px;
+    top: 5px;
+    max-width: 95%;
+    word-wrap: break-word;
+  }
+}
 

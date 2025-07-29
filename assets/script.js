@@ -80,44 +80,62 @@ document.addEventListener("DOMContentLoaded", function() {
 });
    
 
-//Script to initialize the Leaflet map
+// Script to initialize the Leaflet map
 function initMap() {
     if (map) {
         map.remove(); // Reset existing map if reinitializing
     }
-map = L.map("map", {
-            zoomControl: true,
-            scrollWheelZoom: false,
-            doubleClickZoom: false,
-            touchZoom: false,
-            boxZoom: false,
-            keyboard: false,
-            dragging: true,
-            maxBounds: L.latLngBounds(
-                [EW_BOUNDS.south, EW_BOUNDS.west],
-                [EW_BOUNDS.north, EW_BOUNDS.east]
-            ),
-            maxBoundsViscosity: 1.0, // Prevents panning outside bounds
-        }).setView([UK_CENTER_LAT, UK_CENTER_LNG], DEFAULT_ZOOM);
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
 
-//Click handler
-map.on("click", function(e) {
-    const lat = e.latlng.lat;
-    const lng = e.latlng.lng;
-    // Check if the clicked location is within England and Wales bounds
-    if (!isInEnglandWales(lat, lng)) {
-        displayErrorMessage('Sorry this service only covers England and Wales.');
-        return;
-    }
-    // If clicked location is valid, clear markers and load crimes for that area
-    clearMarkers(); // Clear existing markers
-    map.setView([lat, lng], AREA_ZOOM); // Force zoom to 14
-    loadCrimesForArea(lat, lng);
-});
+    map = L.map("map", {
+        zoomControl: true,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        touchZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        dragging: true,
+        maxBounds: L.latLngBounds(
+            [EW_BOUNDS.south, EW_BOUNDS.west],
+            [EW_BOUNDS.north, EW_BOUNDS.east]
+        ),
+        maxBoundsViscosity: 1.0 // Prevents panning outside bounds
+    }).setView([UK_CENTER_LAT, UK_CENTER_LNG], DEFAULT_ZOOM);
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Click handler 
+    map.on("click", function(e) {
+        const lat = e.latlng.lat;
+        const lng = e.latlng.lng;
+
+        // Check if the clicked location is within England and Wales bounds
+        if (!isInEnglandWales(lat, lng)) {
+            displayErrorMessage('Sorry this service only covers England and Wales.');
+            return;
+        }
+
+        // If clicked location is valid, clear markers and load crimes for that area
+        clearMarkers(); 
+        map.setView([lat, lng], AREA_ZOOM); 
+        loadCrimesForArea(lat, lng);
+    });
+
+    // For mobile devices, ensure the map is redrawn after a short delay to fix initial display issues
+    // This is a workaround for Leaflet's initial rendering issues on mobile devices
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 200);
 }
+
+// Force map redraw on window resize/orientation change
+window.addEventListener("resize", () => {
+    if (map) {
+        map.invalidateSize();
+    }
+});
+
 
 // Function to get the last 3 months date in YYYY-MM format
 function lastMonthDate() {
