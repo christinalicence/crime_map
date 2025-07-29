@@ -10,33 +10,31 @@
 #### e. Fonts
 #### f. Features
 
-### 2. Image Credits
-
-### 3. Technologies Used
+### 2. Technologies Used
 #### a. APIs Used
 #### b. Map Information
 #### c. Other Code Credits
 
-### 4. Deployment Information
+### 3. Deployment Information
 #### a. Version Control
 #### b. Deployment to Github Pages
 #### c. Clone the Code Locally
 
-### 5. Testing (See seperate Testing.md file)
+### 4. Testing (See seperate Testing.md file)
 
 
 ### 1. User Experience
 
 #### Purpose of the Website
 
-This website is built to allow people to see how much crime has happened in an area in the last 3 months and understand what type of crime it is. The website is able to search across the UK using official UK Police data. It is as up to date as the latest data revealed by the Police.
+This website is built to allow people to see how much crime has happened in an area in the last 3 months and understand what type of crime it is. The website is able to search across England and Wales using official UK Police data. It is as up to date as the latest data revealed by the Police (which is usually approximately a month old). The date that the data was most recently updated is shown on the website.
 
 #### User Stories
 
 ##### Story A
 
 Someone is looking to buy/rent a house in a local area and wants to understand how much crime is committed to get a feel for how safe the area is.
-    - They need an easily searchable and viewable map.
+    - They need an easily searchable and viewable map and the ability to look at each crime incident in more detail.
 
 #### Story B
 

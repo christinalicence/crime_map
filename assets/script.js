@@ -2,10 +2,33 @@ let map; // Declare map variable globally
 let markers = []; // Declare markers array globally, filled as site runs
 let allCrimes = []; // Declare allCrimes array globally, filled as site runs
 let crimeIndex = {}; // stores all crimes by a unique id
-const DEFAULT_ZOOM = 6;  // Wide UK view zoom level
-const UK_CENTER_LAT = 54.5;
-const UK_CENTER_LNG = -2.0;
+const DEFAULT_ZOOM = 6.5;  // Wide Eng and and Wales view zoom level
+const UK_CENTER_LAT = 52.355; // Latitude for UK center
+const UK_CENTER_LNG = -1.5; // Longitude for UK center
 const AREA_ZOOM = 14;  // Zoom level when viewing specific area
+// England & Wales bounds
+const EW_BOUNDS = {
+    north: 56.0,
+    south: 49.6,
+    west: -7.0,
+    east: 2.5
+};
+
+function isInEnglandWales(lat, lng) {
+    // Tighter check for actual England & Wales area without padding
+    const tightBounds = {
+        north: 55.5,
+        south: 49.9,
+        west: -5.8,
+        east: 1.8
+    };
+    return (
+        lat >= tightBounds.south &&
+        lat <= tightBounds.north &&
+        lng >= tightBounds.west &&
+        lng <= tightBounds.east
+    );
+}
 
 // Function to set up event listeners after the DOM is loaded, before rest of code so testing works
 function setupEventListeners() {
@@ -21,13 +44,13 @@ function setupEventListeners() {
   if (searchButton && postcodeInput) {
     searchButton.addEventListener("click", () => {
       const postcode = postcodeInput.value.trim().toUpperCase(); // Convert postcode to uppercase for consistency
-      if (postcode) {
-        searchPostcode(postcode);
-      } else {
-        displayErrorMessage('Please enter a valid postcode.');
-      }
-    });
-     postcodeInput.addEventListener("keypress", (event) => {
+        if (postcode) {
+            searchPostcode(postcode);
+        } else {
+            displayErrorMessage('Please enter a valid postcode.');
+        }
+        });
+            postcodeInput.addEventListener("keypress", (event) => {
             if (event.key === "Enter") {
                 const postcode = postcodeInput.value.trim().toUpperCase();
                 if (postcode) {
@@ -69,7 +92,12 @@ map = L.map("map", {
             touchZoom: false,
             boxZoom: false,
             keyboard: false,
-            dragging: true
+            dragging: true,
+            maxBounds: L.latLngBounds(
+                [EW_BOUNDS.south, EW_BOUNDS.west],
+                [EW_BOUNDS.north, EW_BOUNDS.east]
+            ),
+            maxBoundsViscosity: 1.0, // Prevents panning outside bounds
         }).setView([UK_CENTER_LAT, UK_CENTER_LNG], DEFAULT_ZOOM);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -79,6 +107,13 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 map.on("click", function(e) {
     const lat = e.latlng.lat;
     const lng = e.latlng.lng;
+    // Check if the clicked location is within England and Wales bounds
+    if (!isInEnglandWales(lat, lng)) {
+        displayErrorMessage('Sorry this service only covers England and Wales.');
+        return;
+    }
+    // If clicked location is valid, clear markers and load crimes for that area
+    clearMarkers(); // Clear existing markers
     map.setView([lat, lng], AREA_ZOOM); // Force zoom to 14
     loadCrimesForArea(lat, lng);
 });
@@ -320,11 +355,19 @@ async function searchPostcode(postcode) {
         }
         const data = await response.json();
         const { latitude, longitude } = data.result;
+
+        // Check if the coordinates are within England and Wales bounds
+        if (!isInEnglandWales(latitude, longitude)) {
+            displayErrorMessage('Sorry this service is only available for England and Wales.');
+            return;
+        }
+        
+
         loadCrimesForArea(latitude, longitude);
-    } catch (error) {
+         } catch (error) {
         console.error('Error fetching postcode:', error);
         displayErrorMessage('Invalid postcode. Please try again.');
-    }
+         }
 }
 
 // Function to reload crimes in the current map view
@@ -387,7 +430,6 @@ module.exports = {
     lastMonthDate,
     addCrimeMarkers,
     highlightListedItem,
-    loadCrimes,
     filterCrimesByCategory,
     clearMarkers,
     updateMarkersByCategory,
