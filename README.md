@@ -57,6 +57,14 @@ A car owner wants to know if it is safe to park their car in an area.
 
 ### Wireframes
 
+Wireframe for the desktop version -
+
+![wireframe for desktop](assets/docs-images/desktopn-wireframe.png)
+
+The design is as simple and visually easy as possible. There is a sidebar that contains the postcode search, a list of crimes in the area and a summary of the top 3 crimes. 
+
+![wireframe for mobile](assets/docs-images/mobile-wireframe.png)
+
 ### Colour Scheme
 
 ### Fonts
@@ -67,7 +75,7 @@ Nunito sans from Google Fonts is used to give a clean look that is easy to read.
 
 #### Map
 
-The webiste uses Leaflet maps to generate a map with markers in the locations where crimes hav occured.
+The webiste uses Leaflet maps to generate a map with markers in the locations where crimes hav occured. You can scroll on this map and select an area you would like to see the crime information for.
 
 #### Postcode Search
 
@@ -75,9 +83,15 @@ You can search using a UK postcode to find an area you want.
 
 #### Dropdown to filter crime types
 
-There is a dropdown menu that allows you to filter the crime types to only the ones you are interested in searching.
+There is a dropdown menu that allows you to filter the crime types to only the ones you are interested in searching within a selected area. 
 
 #### There is a box showing the top 3 crimes in your selected area and the percentage of those crimes.
+
+This is showing a summary of the most common crimes in the selected area.
+
+#### There is a date that shows when the the information was last updated.
+
+This is date is fetched directly from the Police API to explain when it was last updated, so people can understand how up to date the information they are looking at is.
 
 
 ### 2. Technologies Used
