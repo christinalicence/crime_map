@@ -22,6 +22,8 @@
 
 ### 4. Testing (See seperate Testing.md file)
 
+### 5. Improvements for Future Releases
+
 
 ### 1. User Experience
 
@@ -78,7 +80,7 @@ There is a dropdown menu that allows you to filter the crime types to only the o
 #### There is a box showing the top 3 crimes in your selected area and the percentage of those crimes.
 
 
-### 3. Technologies Used
+### 2. Technologies Used
 The website is built using HTML, CSS and javascript.
 
 #### APIs Used
@@ -108,3 +110,57 @@ The exact post I used is here -
 
 [https://stackoverflow.com/questions/6040515/how-do-i-get-month-and-date-of-javascript-in-2-digit-format](https://stackoverflow.com/questions/6040515/how-do-i-get-month-and-date-of-javascript-in-2-digit-format)
 
+### 3. Deployment Information
+#### a. Version Control
+
+The site was created using the Visual Studio code editor and pushed to github to the remote repository ‘Swiftsparrow-rec’.
+
+The following git commands were used throughout development to push code to the remote repo:
+
+git add <file> - This command was used to add the file(s) to the staging area before they are committed.
+
+git commit -m “commit message” - This command was used to commit changes to the local repository queue ready for the final step.
+
+git push - This command was used to push all committed code to the remote repository on github.
+
+#### b. Deployment to Github Pages
+
+The site was deployed to GitHub pages. The steps to deploy are as follows:
+- In the GitHub repository, navigate to the Settings tab
+- From the menu on left select 'Pages'
+- From the source section drop-down menu, select the Branch: main
+- Click 'Save'
+- A live link will be displayed in a green banner when published successfully.
+
+The live link can be found here - [https://christinalicence.github.io/crime_map/](https://christinalicence.github.io/crime_map/)
+
+#### c. Clone the Code Locally
+
+Navigate to the GitHub Repository you want to clone to use locally:
+
+- Click on the code drop down button
+- Click on HTTPS
+- Copy the repository link to the clipboard
+- Open your IDE of choice (git must be installed for the next steps)
+- Type git clone copied-git-url into the IDE terminal
+- The project will now have been cloned on your local machine for use.
+
+### 4. Testing (See seperate Testing.md file)
+
+The manual and automated testing is documented in the testing.md file.
+
+### 5. Improvements for Future Releases.
+
+There are still various improvments that could be made to the map.
+
+- Improve the map bounds with completeley accurate longitude and latitude for the country. At the moment they are approximate. You could also blur out areas not within England and Wales, or make them grey.
+
+- Improve mobile responsiveness to include landscape and touch screen.
+
+- Make the marker for a selected crime highlighted to improve the visual affect.
+
+- Include more information on the pop-up for each crime, including the exact date of the crime and the status of whether it is solved/concluded.
+
+- Improve the map so you can see exactly what are is being searched in a postcode or a click.
+
+- Include a search feature to allow you to search the road names of the crimes in the sidebar.
