@@ -189,7 +189,7 @@ function addCrimeMarkers(crimes) {
       crime._marker = marker;
       markers.push(marker);
 
-      marker.on("click", () => {
+       marker.on("click", () => {
         const linkedCrime = crimeIndex[marker.crimeId];
         if (linkedCrime && linkedCrime._listItem) {
           highlightListedItem(linkedCrime._listItem);
@@ -199,6 +199,7 @@ function addCrimeMarkers(crimes) {
   });
 }
 
+
 // Function to highlight the list item when its marker is clicked and remove previous highlights
 function highlightListedItem(listItem) {
   // Remove highlight from all items
@@ -206,11 +207,14 @@ function highlightListedItem(listItem) {
   allListItems.forEach((li) => {
     li.classList.remove("highlight");
   });
+
   // Add highlight to the clicked item
   if (listItem) {
     listItem.classList.add("highlight");
-    // Scroll to the highlighted item
-    listItem.scrollIntoView({ behavior: "smooth", block: "center" });
+    // Only scroll on non-mobile screens
+    if (window.innerWidth > 768) {
+      listItem.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
   }
 }
 

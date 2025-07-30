@@ -331,6 +331,12 @@ body {
     font-size: 1.8rem;
   }
 
+  #help-button {
+    position: static; 
+    display: block;
+    margin: 10px auto; 
+  }
+
   .sub-heading {
     font-size: 1.2em;
   }
