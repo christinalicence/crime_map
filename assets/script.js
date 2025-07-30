@@ -64,6 +64,25 @@ function setupEventListeners() {
   if (reloadButton) {
     reloadButton.addEventListener("click", reloadCrimesInView);
   }
+}   //Help Modal functionality
+    const helpButton = document.getElementById("help-button");
+    const helpModal = document.getElementById("help-modal");
+    const closeButton = helpModal.querySelector(".close");
+
+    if (helpButton && helpModal && closeButton) {
+        helpButton.addEventListener("click", () => {
+        helpModal.style.display = "block";
+        });
+
+    closeButton.addEventListener("click", () => {
+        helpModal.style.display = "none";
+    });
+
+    window.addEventListener("click", (e) => {
+        if (e.target === helpModal) {
+        helpModal.style.display = "none";
+     }
+  });
 }
 
 // Function to initialize the page
