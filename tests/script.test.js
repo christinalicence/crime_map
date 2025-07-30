@@ -32,7 +32,7 @@ const  {
     updateCrimeList,
     displayErrorMessage,
     displayTopCrimes
-      } = require('./assets/script.js');
+      } = require('../assets/js/script.js');
 
 
     // mocks leafket

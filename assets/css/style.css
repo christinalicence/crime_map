@@ -24,30 +24,35 @@ body {
   font-family: 'Nunito Sans', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
-  height: 100vh;
 }
 
 
 /* Main Layout */
 #main-container {
   display: flex;
-  height: calc(100vh - 85px);
-  margin: 20px;
+  height: calc(100vh - 70px); /* 70px is the title height */
+  margin: 0;
   gap: 20px;
+  padding: 20px;
+  box-sizing: border-box; /* Ensure padding is included in height to stop scrolling*/
 }
 
 #sidebar-container {
   width: 35%;
-  padding: 20px;
+  padding: 0px 20px;
   background-color: white;
   overflow-y: auto;
+  height: 100%; 
+  box-sizing: border-box; /* Ensure padding is included in height to stop scrolling*/
 }
+
 /* Map */
 #map-container {
   flex: 1;
   position: relative;
   overflow: hidden;
   background-color: white;
+  height: 100%; /* Ensure map fills the container */
 }
 
 #map { 
@@ -69,7 +74,7 @@ body {
 
 .sub-heading {
   font-size: 1.5em;
-  margin: 20px 0 10px;
+  margin: 10px 0px;
   text-align: left;
   color: var(--primary-color);
 }
