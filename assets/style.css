@@ -79,11 +79,11 @@ body {
 /* postcode search styles */
 
 #postcode-search {
-  width: 90%;
+  width: 100%;
   padding: 10px;
   font-size: 1rem;
   margin-bottom: 10px;
-  border: 1px solid var(--primary-color);
+  border: 0.5px solid var(--primary-color);
 }
 
 #postcode-search:focus {
@@ -92,7 +92,7 @@ body {
 }
 
 #search-button {
-  width: 90%;
+  width: 100%;
   padding: 10px;
   font-weight: bold;
   background-color: var(--primary-color);
@@ -121,8 +121,9 @@ body {
 /* Info Section Styles */
 #info {
   text-align: left;
-  padding: 0;
+  padding: 10px;
   margin-top: 20px;
+  border: 0.5px solid var(--primary-color);
 }
 
 
@@ -153,6 +154,30 @@ body {
   background-color: var(--highlight-color);
 }
 
+/* Dropdown Styles */
+#dropdown {
+  margin-top: 10px;
+}
+
+#dropdown select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 0.5px solid var(--primary-color);
+  background-color: white;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#dropdown select:hover {
+  border-color: var(--secondary-color);
+}
+
+#dropdown select:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
 
 /* Highlight for filter match */
 .highlight {
@@ -181,7 +206,7 @@ body {
 
 #error-message {
   background-color: var(--error-color);
-  color: var(--primary-color);
+  color: white;
   font-weight: bold;
   padding: 10px;
   text-align: center;
