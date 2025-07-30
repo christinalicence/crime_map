@@ -291,14 +291,16 @@ body {
   background-color: var(--error-color);
   color: white;
   font-weight: bold;
-  padding: 10px;
+  padding: 10px 15px;
   text-align: center;
   position: fixed;
-  bottom: 50%;
-  left: 25%;
-  right: 25%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);/* Center it */
   z-index: 999;
   display: none; /* Hidden by default */
+  max-width: 80%; 
+  word-wrap: break-word;
 }
 
 /* Responsive Styles */
@@ -341,10 +343,8 @@ body {
 
   #error-message {
     font-size: 14px;
-    padding: 10px 15px;
-    top: 5px;
-    max-width: 95%;
-    word-wrap: break-word;
+    padding: 10px 14px;
+    max-width: 90%; /* Even wider on small screens */
   }
 }
 
