@@ -1,5 +1,3 @@
-const { co } = require("co");
-
 let map; // Declare map variable globally
 let markers = []; // Declare markers array globally, filled as site runs
 let allCrimes = []; // Declare allCrimes array globally, filled as site runs
@@ -13,14 +11,14 @@ const EW_BOUNDS = {
   north: 56.0,
   south: 49.6,
   east: 2.5,
-  west: -7.0
+  west: -6.0
 };
 
 // Ireland bounds for checking if clicked location is in England and Wales
 const IRELAND_BOUNDS = {
   north: 55.5,
   south: 51.4,
-  east: -5.9,
+  east: -5.4,
   west: -10.7
 };
 
@@ -33,13 +31,30 @@ function isInIreland(lat, lng) {
   );
 }
 
+// Isle of Man bounds for checking if clicked location is in England and Wales
+const ISLE_OF_MAN_BOUNDS = {
+  north: 54.4,
+  south: 54.0,
+  east: -4.3,
+  west: -4.8
+};
+
+function isInIsleOfMan(lat, lng) {
+  return (
+    lat >= ISLE_OF_MAN_BOUNDS.south &&
+    lat <= ISLE_OF_MAN_BOUNDS.north &&
+    lng >= ISLE_OF_MAN_BOUNDS.west &&
+    lng <= ISLE_OF_MAN_BOUNDS.east
+  );
+}
+
 function isInEnglandWales(lat, lng) {
   // Tighter check for actual England & Wales area without padding that is allowed on map scroll
   const tightBounds = {
     north: 55.5,
     south: 49.9,
     east: 1.8,
-    west: -5.8
+    west: -6.4
   };
   return (
     lat >= tightBounds.south &&
@@ -147,11 +162,11 @@ function initMap() {
     const lat = e.latlng.lat;
     const lng = e.latlng.lng;
 
-    // Check location is not in Ireland
-    if (isInIreland(lat, lng)) {
-      displayErrorMessage("Sorry this service only covers England and Wales");
-      return;
-    }
+    // Check location is not in Ireland or Isle of Man
+    if (isInIreland(lat, lng) || isInIsleOfMan(lat, lng)) { 
+    displayErrorMessage("Sorry, this service only covers England and Wales.");
+    return;
+   }
 
     // Check if the clicked location is within England and Wales bounds
     if (!isInEnglandWales(lat, lng)) {
@@ -428,10 +443,10 @@ async function searchPostcode(postcode) {
     const data = await response.json();
     const { latitude, longitude } = data.result;
 
-    // Check postcode is not in Ireland
-    if (isInIreland(latitude, longitude)) {
-      displayErrorMessage("Sorry this service only covers England and Wales");
-      return;
+    // Check postcode is not in Ireland or Isle of Man
+    if (isInIreland(latitude, longitude) || isInIsleOfMan(latitude, longitude)) { // Check for Ireland OR Isle of Man
+    displayErrorMessage("Sorry this service only covers England and Wales");
+    return;
     }
 
     // Check if the coordinates are within England and Wales bounds
