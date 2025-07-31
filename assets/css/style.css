@@ -44,6 +44,7 @@ body {
   overflow-y: auto;
   height: 100%; 
   box-sizing: border-box; /* Ensure padding is included in height to stop scrolling*/
+  align-self: flex-start; /* Align sidebar to the top */
 }
 
 /* Map */
@@ -66,11 +67,17 @@ body {
  #title {
   text-align: left;
   font-size: 2.5rem;
-  padding: 15px 20px;
+  padding: 0;
   color: var(--primary-color);
   margin: 0;
   font-weight: 700;
-        }
+  flex-grow: 0; /* Allow title to grow and fill space */
+}
+
+/* Hide mobile shorter title */
+.mobile-title {
+  display: none;
+}
 
 .sub-heading {
   font-size: 1.5em;
@@ -79,11 +86,22 @@ body {
   color: var(--primary-color);
 }
 
+#header-container {
+  position: relative;
+  padding-left: 20px;
+  padding-right: 20px; 
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px; /* Space between title and help button */ 
+}
+
+
 /* Help Button */
 #help-button {
-  position: fixed;
+  position: static;
   top: 20px;
-  right: 20px;
+  right: 20px; 
   padding: 10px 20px;
   background-color: var(--primary-color);
   color: white;
@@ -92,6 +110,7 @@ body {
   font-weight: bold;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
+
 #help-button:hover {
   background-color: var(--secondary-color);
 }
@@ -110,7 +129,7 @@ body {
   overflow: auto;
 }
 
-/* Modal Box (themed) */
+/* Modal Box */
 .modal-content {
   background-color: var(--primary-color);
   margin: 10% auto;
@@ -304,6 +323,29 @@ body {
 }
 
 /* Responsive Styles */
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #help-button {
+    position: static;
+    display: block;
+    margin: 10px 0 0 0;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #header-container {
+    flex-direction: column; 
+    align-items: flex-start; 
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 10px; 
+  }
+}
+  
+
+/* Mobile Styles */
 @media (max-width: 768px) {
   #main-container {
     flex-direction: column;
@@ -327,14 +369,28 @@ body {
     width: 100%;
   }
 
-  #title {
-    font-size: 1.8rem;
+  .full-title {
+    display: none;
   }
 
+  .mobile-title {
+    display: inline;
+    text-align: left;
+  }
+
+  #header-container { 
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-direction: column; /* Stack title and button vertically */
+    align-items: flex-start; /* Align both to the left */
+    gap: 10px; /* Add space between title and button */
+  }
+  
   #help-button {
-    position: static; 
-    display: block;
-    margin: 10px auto; 
+    position: static;
+    display: block; 
+    padding: 10px 15px; /* Consistent padding */
+    margin: 0; 
   }
 
   .sub-heading {
