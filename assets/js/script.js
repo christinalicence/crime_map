@@ -4,7 +4,7 @@ let allCrimes = []; // Declare allCrimes array globally, filled as site runs
 let crimeIndex = {}; // stores all crimes by a unique id
 const DEFAULT_ZOOM = 6.5; // Wide Eng and and Wales view zoom level
 const UK_CENTER_LAT = 52.355; // Latitude for UK center
-const UK_CENTER_LNG = -1.5; // Longitude for UK center
+const UK_CENTER_LNG = -3.0; // Longitude for UK center
 const AREA_ZOOM = 14; // Zoom level when viewing specific area
 // England & Wales bounds
 const EW_BOUNDS = {

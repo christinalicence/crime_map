@@ -6,8 +6,8 @@
   --primary-color: #2C3E50;
   --secondary-color: #2980B9;
   --background-color: #F4F6F8;
-  --highlight-color: #ECF0F1;
-  --error-color: #E74C3C;
+  --highlight-color: #C9CED1;
+  --error-color: #C0392B;
   --text-color: #333;
 }
 
@@ -124,7 +124,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: transparent;
+  background-color: rgba(0,0,0,0.5);
   color: var(--primary-color);
   overflow: auto;
 }
@@ -254,6 +254,7 @@ body {
 
 .crime-items li:hover {
   background-color: var(--highlight-color);
+  color: white;
 }
 
 /* Dropdown Styles */
