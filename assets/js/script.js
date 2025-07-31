@@ -1,3 +1,5 @@
+const { co } = require("co");
+
 let map; // Declare map variable globally
 let markers = []; // Declare markers array globally, filled as site runs
 let allCrimes = []; // Declare allCrimes array globally, filled as site runs
@@ -14,8 +16,25 @@ const EW_BOUNDS = {
   west: -7.0
 };
 
+// Ireland bounds for checking if clicked location is in England and Wales
+const IRELAND_BOUNDS = {
+  north: 55.5,
+  south: 51.4,
+  east: -5.9,
+  west: -10.7
+};
+
+function isInIreland(lat, lng) {
+  return (
+    lat >= IRELAND_BOUNDS.south &&
+    lat <= IRELAND_BOUNDS.north &&
+    lng >= IRELAND_BOUNDS.west &&
+    lng <= IRELAND_BOUNDS.east
+  );
+}
+
 function isInEnglandWales(lat, lng) {
-  // Tighter check for actual England & Wales area without padding
+  // Tighter check for actual England & Wales area without padding that is allowed on map scroll
   const tightBounds = {
     north: 55.5,
     south: 49.9,
@@ -128,6 +147,12 @@ function initMap() {
     const lat = e.latlng.lat;
     const lng = e.latlng.lng;
 
+    // Check location is not in Ireland
+    if (isInIreland(lat, lng)) {
+      displayErrorMessage("Sorry this service only covers England and Wales");
+      return;
+    }
+
     // Check if the clicked location is within England and Wales bounds
     if (!isInEnglandWales(lat, lng)) {
       displayErrorMessage("Sorry this service only covers England and Wales.");
@@ -238,14 +263,12 @@ async function loadCrimesForArea(lat, lng) {
       displayTopCrimes(crimes);
     }
   } catch (error) {
-    console.error("Failed to load crimes:", error);
     displayErrorMessage(
       "Sorry, something went wrong while loading crime data. Please try again later."
     );
   }
 }
 
-// Dropdown crime filter functionality
 
 // Function to filter crimes by category
 function filterCrimesByCategory(category) {
@@ -405,6 +428,12 @@ async function searchPostcode(postcode) {
     const data = await response.json();
     const { latitude, longitude } = data.result;
 
+    // Check postcode is not in Ireland
+    if (isInIreland(latitude, longitude)) {
+      displayErrorMessage("Sorry this service only covers England and Wales");
+      return;
+    }
+
     // Check if the coordinates are within England and Wales bounds
     if (!isInEnglandWales(latitude, longitude)) {
       displayErrorMessage(
@@ -452,7 +481,6 @@ async function reloadCrimesInView() {
       displayErrorMessage("No crimes found in the current view.");
     }
   } catch (error) {
-    console.error("Failed to reload crimes:", error);
     displayErrorMessage(
       "Sorry, something went wrong while reloading crime data. Please try again later."
     );
