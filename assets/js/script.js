@@ -139,10 +139,8 @@ function initMap() {
 
   map = L.map("map", {
     doubleClickZoom: false,
-    scrollWheelZoom: false,
     zoomControl: true,
     boxZoom: false,
-    touchZoom: false,
     dragging: true,
     keyboard: false,
     maxBounds: L.latLngBounds(

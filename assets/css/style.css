@@ -4,10 +4,10 @@
 /* CSS variables */
 :root {
   --primary-color: #2C3E50;
-  --secondary-color: #2980B9;
+  --secondary-color: #1f5a86;
   --background-color: #F4F6F8;
-  --highlight-color: #C9CED1;
-  --error-color: #C0392B;
+  --highlight-color: #b0b6ba;
+  --error-color: #D32F2F;
   --text-color: #333;
 }
 
@@ -113,6 +113,7 @@ body {
 
 #help-button:hover {
   background-color: var(--secondary-color);
+  color: white;
 }
 
 /* Modal Background */
@@ -175,7 +176,7 @@ body {
 }
 
 .close:hover {
-  color: var(--secondary-color);
+  color: white;
 }
 
 /* postcode search styles */
@@ -254,7 +255,6 @@ body {
 
 .crime-items li:hover {
   background-color: var(--highlight-color);
-  color: white;
 }
 
 /* Dropdown Styles */
@@ -284,7 +284,7 @@ body {
 
 /* Highlight for filter match */
 .highlight {
-  background-color: #ffeaa7;
+  background-color: var(--highlight-color);
   transition: background-color 0.5s ease;
 }
 
@@ -411,3 +411,49 @@ body {
   }
 }
 
+/* Landscape Mode on Mobiles and Tablets (max-width of 1024px) */
+@media (max-width: 1024px) and (orientation: landscape) {
+  /* Revert main container to a row layout */
+  #main-container {
+    flex-direction: row;
+    height: 100vh; /* Use full viewport height for landscape */
+    padding: 10px;
+    gap: 10px;
+  }
+
+  /* Adjust sidebar to take up a portion of the screen */
+  #sidebar-container {
+    width: 40%; /* Give sidebar a specific width */
+    height: 100%;
+    order: 0; /* Reset the order so it appears first */
+  }
+  
+  /* Map container takes up the remaining space */
+  #map-container {
+    height: 100%;
+    flex: 1; /* Allow map to fill the remaining space */
+    order: 0; /* Reset the order so it appears second */
+  }
+
+  /* Adjust title/header for landscape layout */
+  #header-container {
+    flex-direction: row; /* Keep the header items next to each other */
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+  }
+
+  #title {
+    font-size: 2rem; 
+  }
+  
+  .sub-heading {
+    font-size: 1.2em;
+    margin: 5px 0;
+  }
+
+  #help-button {
+    position: static;
+    margin: 0;
+  }
+}

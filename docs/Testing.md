@@ -10,7 +10,7 @@ It had no warnings, but there were same "trailing slash on void elements' pointe
 
 ![Image of HTML validator info points](assets/docs-images/html-validator.png)
 
-## JS Lint
+## JS Hint
 
 ## CSS Validator
 
@@ -22,6 +22,20 @@ It passed with no errors
 There was one warning because external imports are not checked, this appeared because I used Google fonts.
 
 ## Lighthouse testing
+
+## Wave Testing
+
+I used the [WAVE accessibility evaluation tool](https://wave.webaim.org/) to test for any accessibility issues. 
+
+The report showed one error
+
+![Image of Wave Report](assets/docs-images/wave-report.png)
+
+This was a missing aria label for my postcode search.
+
+![Image of Wave error](assets/docs-images/wave-error.png)
+
+I have corrected this issue by adding an Aria label.
 
 # Automated Testing
 
