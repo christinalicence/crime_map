@@ -113,7 +113,7 @@ body {
 
 #help-button:hover {
   background-color: var(--secondary-color);
-  color: white;
+  color: var(--highlight-color);
 }
 
 /* Modal Background */
@@ -176,7 +176,7 @@ body {
 }
 
 .close:hover {
-  color: white;
+  color: var(--highlight-color);
 }
 
 /* postcode search styles */
@@ -306,6 +306,15 @@ body {
   background-color: var(--secondary-color);
 }
 
+/* Button focus styles to improve accessibility */
+#help-button:focus,
+#search-button:focus,
+#reload-button:focus,
+select:focus {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
 
 #error-message {
   background-color: var(--error-color);
@@ -408,6 +417,7 @@ body {
     font-size: 14px;
     padding: 10px 14px;
     max-width: 90%; /* Even wider on small screens */
+    word-break: break-word; /* Ensures fit on small screens */
   }
 }
 
@@ -457,3 +467,4 @@ body {
     margin: 0;
   }
 }
+   

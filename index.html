@@ -38,47 +38,54 @@
 
   <body>
     <main>
+     <header>
       <div id="header-container">
         <h1 id="title">
             <span class="full-title">Crime Map of England and Wales</span>
             <span class="mobile-title">Crime Map</span>
         </h1>
-        <button id="help-button">How to Use this Map</button>
+         <button id="help-button" type="button" aria-label="Open help information">How to use this Map</button>
       </div>
+      </header>
       <!--Help Modal-->
-      <div id="help-modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2 class="modal-heading">How to Use this Map</h2>
-          <div class="modal-paragraph">
-          <p>
-            This interactive map allows you to explore recent crime data across
-            England and Wales. You can search for specific locations, filter by
-            crime category, and view detailed crime information. The data is
-            from the UK Police and the map is updated when the Police release
-            new data. The most recent updated date is displayed near the bottom
-            of the page.
-          </p>
-            </div>
-          <ul>
-            <li>
-              Click anywhere on the map within England & Wales to see recent
-              crimes in that area.
-            </li>
-            <li>Use the dropdown menu to filter crimes by category.</li>
-            <li>Search for a postcode to jump directly to that location.</li>
-            <li>Click a crime in the list to highlight it on the map.</li>
-            <li>
-              Use the "Reload Crimes" button to refresh crime data for your
-              current view.
-            </li>
-          </ul>
-        </div>
+    <div id="help-modal" 
+       class="modal" 
+       role="dialog" 
+       aria-labelledby="modal-heading" 
+       aria-describedby="modal-content"
+       aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" 
+              type="button" 
+              aria-label="Close help dialog"
+              title="Close">&times;</button>
+      
+      <h2 id="modal-heading" class="modal-heading">How to Use the Crime Map</h2>
+      <div id="modal-content">
+        <p class="modal-paragraph">
+          This interactive map shows recent crime data for England and Wales.
+        </p>
+        <p class="modal-paragraph">
+          <strong>How to explore crime data:</strong>
+        </p>
+        <ul>
+          <li>Click anywhere on the map to view crimes in that area</li>
+          <li>Search for a specific postcode using the search box</li>
+          <li>Use the dropdown to filter crimes by type</li>
+          <li>Click on crimes in the list to see their location on the map</li>
+          <li>Use the reload button to refresh data for the current view</li>
+        </ul>
+        <p class="modal-paragraph">
+          Crime data is sourced from the UK Police API and typically shows information from about 3 months ago due to reporting processes.
+        </p>
       </div>
+    </div>
+  </div>
 
-      <div id="main-container">
-        <div id="sidebar-container">
-          <div id="sidebar">
+<div id="main-container">
+<div id="sidebar-container">
+    <nav>
+        <div id="sidebar">
             <div id="search-container">
               <h2 class="sub-heading">Search for a Location</h2>
               <input
@@ -124,6 +131,8 @@
             </div>
           </div>
         </div>
+        </nav>
+        
 
         <div id="map-container">
           <div id="map"></div>

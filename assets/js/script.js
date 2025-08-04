@@ -98,7 +98,7 @@ function setupEventListeners() {
   if (reloadButton) {
     reloadButton.addEventListener("click", reloadCrimesInView);
   }
-}   //Help Modal functionality
+   //Help Modal functionality
     const helpButton = document.getElementById("help-button");
     const helpModal = document.getElementById("help-modal");
     const closeButton = helpModal.querySelector(".close");
@@ -117,6 +117,7 @@ function setupEventListeners() {
         helpModal.style.display = "none";
      }
   });
+  }
 }
 
 // Function to initialize the page
@@ -397,6 +398,25 @@ function updateCrimeList(crimes) {
       }
     });
   });
+  // Adjusting modal to pass accessibility checks
+if (helpButton && helpModal && closeButton) {
+  helpButton.addEventListener("click", () => {
+    helpModal.style.display = "block";
+    helpModal.setAttribute("aria-hidden", "false"); // CRITICAL ACCESSIBILITY FIX
+  });
+
+  closeButton.addEventListener("click", () => {
+    helpModal.style.display = "none";
+    helpModal.setAttribute("aria-hidden", "true"); // CRITICAL ACCESSIBILITY FIX
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === helpModal) {
+      helpModal.style.display = "none";
+      helpModal.setAttribute("aria-hidden", "true"); // CRITICAL ACCESSIBILITY FIX
+    }
+  });
+}
 }
 
 // Function to display top 3 crimes and percentage in the crimes-percentage div
@@ -514,22 +534,23 @@ function displayErrorMessage(message) {
   }
 }
 
-// Export functions for testing
-
-module.exports = {
-  setupEventListeners,
-  setupPage,
-  initMap,
-  lastMonthDate,
-  addCrimeMarkers,
-  highlightListedItem,
-  filterCrimesByCategory,
-  clearMarkers,
-  updateMarkersByCategory,
-  populateCrimeDropdown,
-  formatCrimeCategory,
-  displayLastUpdatedDate,
-  updateCrimeList,
-  displayErrorMessage,
-  displayTopCrimes,
-};
+//Wraps this in an 'if' to stop errors in the console when running tests
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    setupEventListeners,
+    setupPage,
+    initMap,
+    lastMonthDate,
+    addCrimeMarkers,
+    highlightListedItem,
+    filterCrimesByCategory,
+    clearMarkers,
+    updateMarkersByCategory,
+    populateCrimeDropdown,
+    formatCrimeCategory,
+    displayLastUpdatedDate,
+    updateCrimeList,
+    displayErrorMessage,
+    displayTopCrimes
+  };
+}
