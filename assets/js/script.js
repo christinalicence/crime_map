@@ -98,26 +98,41 @@ function setupEventListeners() {
   if (reloadButton) {
     reloadButton.addEventListener("click", reloadCrimesInView);
   }
-   //Help Modal functionality
-    const helpButton = document.getElementById("help-button");
-    const helpModal = document.getElementById("help-modal");
-    const closeButton = helpModal.querySelector(".close");
 
-    if (helpButton && helpModal && closeButton) {
-        helpButton.addEventListener("click", () => {
-        helpModal.style.display = "block";
-        });
+  // Help Modal functionality 
+  const helpButton = document.getElementById("help-button");
+  const helpModal = document.getElementById("help-modal");
+  const closeButton = helpModal.querySelector(".close");
 
-    closeButton.addEventListener("click", () => {
-        helpModal.style.display = "none";
-    });
-
-    window.addEventListener("click", (e) => {
-        if (e.target === helpModal) {
-        helpModal.style.display = "none";
-     }
+  if (helpButton && helpModal && closeButton) {
+  // Set initial state of the modal as hidden
+    helpModal.setAttribute("aria-hidden", "true");
+  
+    helpButton.addEventListener("click", () => {
+    // When the modal opens, make it visible and accessible
+    helpModal.style.display = "block";
+    helpModal.setAttribute("aria-hidden", "false");
+    // Move focus to the first focusable element inside the modal for screen reader users
+    closeButton.focus(); 
   });
-  }
+
+  closeButton.addEventListener("click", () => {
+    // When the modal closes, hide it and make it inaccessible
+    helpModal.style.display = "none";
+    helpModal.setAttribute("aria-hidden", "true");
+    // Return focus to the element that opened the modal
+    helpButton.focus(); 
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === helpModal) {
+      // Hide and make inaccessible if user clicks outside the modal
+      helpModal.style.display = "none";
+      helpModal.setAttribute("aria-hidden", "true");
+      helpButton.focus(); 
+    }
+  });
+}
 }
 
 // Function to initialize the page
@@ -398,26 +413,9 @@ function updateCrimeList(crimes) {
       }
     });
   });
-  // Adjusting modal to pass accessibility checks
-if (helpButton && helpModal && closeButton) {
-  helpButton.addEventListener("click", () => {
-    helpModal.style.display = "block";
-    helpModal.setAttribute("aria-hidden", "false"); // CRITICAL ACCESSIBILITY FIX
-  });
 
-  closeButton.addEventListener("click", () => {
-    helpModal.style.display = "none";
-    helpModal.setAttribute("aria-hidden", "true"); // CRITICAL ACCESSIBILITY FIX
-  });
+}
 
-  window.addEventListener("click", (e) => {
-    if (e.target === helpModal) {
-      helpModal.style.display = "none";
-      helpModal.setAttribute("aria-hidden", "true"); // CRITICAL ACCESSIBILITY FIX
-    }
-  });
-}
-}
 
 // Function to display top 3 crimes and percentage in the crimes-percentage div
 

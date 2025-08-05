@@ -113,7 +113,11 @@ body {
 
 #help-button:hover {
   background-color: var(--secondary-color);
-  color: var(--highlight-color);
+}
+
+#help-button:focus {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
 }
 
 /* Modal Background */
@@ -167,6 +171,8 @@ body {
 
 /* Close Button */
 .close {
+  background-color: transparent;
+  border: none;
   float: right;
   font-size: 1.5rem;
   font-weight: bold;
@@ -177,6 +183,7 @@ body {
 
 .close:hover {
   color: var(--highlight-color);
+  outline: none;
 }
 
 /* postcode search styles */
@@ -206,6 +213,16 @@ body {
 
 #search-button:hover {
   background-color: var(--secondary-color);
+}
+
+#search-button:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
+
+input::placeholder {
+  color: var(--text-color);
+  opacity: 0.7; /* Slightly transparent for placeholder */
 }
 
 /* Most Common Crimes Styles */
@@ -296,7 +313,7 @@ body {
   z-index: 1000;
   padding: 10px 20px;
   background-color: var(--primary-color);
-  color: var(--background-color);
+  color: white;
   border: none;
   cursor: pointer;
   font-weight: bold;
@@ -306,15 +323,10 @@ body {
   background-color: var(--secondary-color);
 }
 
-/* Button focus styles to improve accessibility */
-#help-button:focus,
-#search-button:focus,
-#reload-button:focus,
-select:focus {
+#reload-button:focus {
   outline: 2px solid var(--secondary-color);
   outline-offset: 2px;
 }
-
 
 #error-message {
   background-color: var(--error-color);
@@ -408,6 +420,7 @@ select:focus {
   }
   #postcode-search {
     width: 100%;
+
   }
   #search-button {
     width: 100%;
@@ -426,28 +439,28 @@ select:focus {
   /* Revert main container to a row layout */
   #main-container {
     flex-direction: row;
-    height: 100vh; /* Use full viewport height for landscape */
+    height: 100vh; 
     padding: 10px;
     gap: 10px;
   }
 
   /* Adjust sidebar to take up a portion of the screen */
   #sidebar-container {
-    width: 40%; /* Give sidebar a specific width */
+    width: 40%; 
     height: 100%;
-    order: 0; /* Reset the order so it appears first */
+    order: 0; 
   }
   
   /* Map container takes up the remaining space */
   #map-container {
     height: 100%;
-    flex: 1; /* Allow map to fill the remaining space */
-    order: 0; /* Reset the order so it appears second */
+    flex: 1; 
+    order: 0; 
   }
 
   /* Adjust title/header for landscape layout */
   #header-container {
-    flex-direction: row; /* Keep the header items next to each other */
+    flex-direction: row; 
     align-items: center;
     gap: 10px;
     padding: 0;
@@ -467,4 +480,4 @@ select:focus {
     margin: 0;
   }
 }
-   
+  
