@@ -1,8 +1,75 @@
-# Manual Tesing
+# Testing for the Crime Map of UK and Wales
 
-## Are the User Stories Accomplished?
+![Mockup of Website](../assets/docs-images/mock-up.png)
 
-## JS Hint
+## Table of Contents
+
+### 1. Manual Testing
+#### a. Are the User Stories Accomplished
+#### b. Testing Using Code Validators
+#### c. Accessibility and Performance Testing
+#### d. Manual Testing of Features
+#### e. Manual Testing of Responsiveness
+#### f. User Testing/Feedback
+
+### 2. Automated Testing using Jest
+
+
+## Manual Tesing
+
+### Are the User Stories Accomplished?
+
+#### Story A
+
+Someone is looking to buy/rent a house in a local area and wants to understand how much crime is committed to get a feel for how safe the area is.
+    - They need an easily searchable and viewable map and the ability to look at each crime incident in more detail.
+
+##### Accomplished through the map feature
+
+![Image of map with markers](../assets/docs-images/map-feature.png)
+
+#### Story B
+
+Someone wants to understand the types of crimes committed in their area to get a more in depth feel of the local social issues.
+    - They need a filter that easily allows you to see the type and location of each crime. 
+    - They also want to understand what crimes are most common in the local area.
+
+##### Accomplished through the dropdown crime type filter and the list of top 3 local crimes
+
+The dropdown lets you search crimes locally by type.
+
+![Dropdown menu with crime category filter](../assets/docs-images/crimes-list-feature.png)
+
+The list of top 3 crimes in the local area gives detail about what is most common and how common they are.
+
+![Top 3 Crimes in the area with percentages](../assets/docs-images/common-crimes-feature.png)
+
+
+#### Story C
+
+A tourist is visiting a town and they want to understand the safest area of town to stay in.
+    - They need a map that can be moved around within an area and the map regenerates to show the crimes within the new area.
+
+##### Accomplished using the map feature and reload button
+
+You can scroll on the map and press the reload button
+
+![Reload button the map](../assets/docs-images/reload-button-feature.png)
+
+#### Story D
+
+A car owner wants to know if it is safe to park their car in an area.
+    - They need to be able to filter vehicle crime and see how common it is in an area.
+
+##### Accomplished using the dropdown filter.
+
+You can filter vehicle crime using the dropdown and see all vehicle crime on the map.
+
+![Map showing just vehicle crimes](../assets/docs-images/vehicle-crime-map.png)
+
+### Testing Using Code Validators
+
+#### JS Hint
 
 I used [JSHint](https://jshint.com/) to check my javascript file.
 
@@ -19,7 +86,7 @@ It also listed an undefined variable.
 This is a result of the code used by Leaflet Maps which I used to generate the map. I didn't adjust code based on this as it is important for the running of the website.
 
 
-## HTML validator
+#### HTML validator
 
 I used the [W3C HTML validator](https://validator.w3.org/)
 
@@ -28,7 +95,7 @@ It had no warnings, but there were same "trailing slash on void elements' pointe
 ![HTML validator info points](../assets/docs-images/html-validator.png)
 
 
-## CSS Validator
+#### CSS Validator
 
 I used the [W3C CSS validator](https://jigsaw.w3.org/css-validator/)
 
@@ -37,7 +104,9 @@ It passed with no errors
 
 There was one warning because external imports are not checked, this appeared because I used Google fonts.
 
-## Wave Testing
+### Accessibility and Performance Testing
+
+### Wave Testing
 
 I used the [WAVE accessibility evaluation tool](https://wave.webaim.org/) to test for any accessibility issues. 
 
@@ -51,11 +120,11 @@ This was a missing aria label for my postcode search.
 
 I have corrected this issue by adding an Aria label.
 
-## Lighthouse testing
+#### Lighthouse testing
 
 The Lighthouse testing has created some interesting issues.
 
-### Performance
+##### Performance
 
 The Performance Score is 86
 
@@ -67,7 +136,7 @@ The metrics are
 
 I think these are acceptible.
 
-### Accessibility
+##### Accessibility
 
 The accessibility report has created consistent issues. It has repeatedly crashed, doesn't give a score and doesn't flag any elements that need attention.
 
@@ -77,6 +146,9 @@ There are no details to fix given in the report
 
 ![The dropdown without further details given by Lighthouse](../assets/docs-images/lighthouse-accessibility-error.png)
 
+This seems to be a known bug within Leaflet/Lighthouse
+
+[Link to github post](https://github.com/GoogleChrome/lighthouse/issues/15497)
 
 
 
@@ -84,9 +156,7 @@ There are no details to fix given in the report
 
 
 
-
-
-### Best Practice
+##### Best Practice
 
 The Best Practice is 100% when run on a desktop
 
@@ -102,14 +172,24 @@ It flags that some of the map images are low resolution in this format
 
 As these are imported using the Leflet maps and open streep maps I haven't adjusted these images.
 
-### SEO
+##### SEO
 
 The Lighthouse SEO report is 100%
 
 ![Lighthouse SEO Report](../assets/docs-images/lighthouse-seo.png)
 
+### Manual Testing of Features
+
+The different features of the website have been tested extensively. They have been tested to ensure they work and to give appropriate error messages if there is an issue.
 
 
-# Automated Testing
+### Manual Testing of Responsiveness
 
-## Automated Testing with Jest
+It has been tested on all common screen types, including iphone and android phones, both on landscape and portrait mode.
+
+### User Testing/Feedback
+
+User testing was carried out, a useful piece of feedback was to ensure it could be fully used with just the keyboard. The tab button wasn't working properly to move between different features of the site.
+
+
+## Automated Testing using Jest

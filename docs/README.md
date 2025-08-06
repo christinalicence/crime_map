@@ -1,14 +1,17 @@
-# crime_map
+# Crime Map of England and Wales
+
+![Mock Up of Website](../assets/docs-images/mock-up.png)
 
 ## Table of Contents
 
 ### 1. User Experience
-#### a. Purpose of the Webstie
+#### a. Purpose of the Website
 #### b. User Stories
 #### c. Wireframes
 #### d. Colour Palette
 #### e. Fonts
 #### f. Features
+#### g. User Interface Design Decisions
 
 ### 2. Technologies Used
 #### a. APIs Used
@@ -40,13 +43,13 @@ Someone is looking to buy/rent a house in a local area and wants to understand h
 
 #### Story B
 
-Someone wants to undersand the types of crimes committed in their area to get a more in depth feel of the local social issues.
+Someone wants to understand the types of crimes committed in their area to get a more in depth feel of the local social issues.
     - They need a filter that easily allows you to see the type and location of each crime. 
-    - They also want to see the numbers of the crimes that have been committed locally.
+    - They also want to understand which crimes are most common in the local area.
 
 #### Story C
 
-A tourist is visiting a town and they want to understand to the safest area of town to stay in.
+A tourist is visiting a town and they want to understand the safest area of town to stay in.
     - They need a map that can be moved around within an area and the map regenerates to show the crimes within the new area.
 
 #### Story D
@@ -85,28 +88,73 @@ The website has several features which allow the user to search crimes nationall
 
 Their is a pop up modal which gives instructions on how to use the map and the features.
 
-
+![Pop up modal with instructions for using the website](../assets/docs-images/help-modal-feature.png)
 
 #### Map
 
-The webiste uses Leaflet maps to generate a map with markers in the locations where crimes hav occured. You can scroll on this map and select an area you would like to see the crime information for.
+The website uses Leaflet maps to generate a map with markers in the locations where crimes have occured. You can scroll on this map and select an area you would like to see the crime information for.
+
+![Map of England and Wales zoomed out](../assets/docs-images/map-feature.png)
+
+![Map zoomed in showing markers](../assets/docs-images/map-zoomed-in-feature.png)
 
 #### Postcode Search
 
-You can search using a UK postcode to find an area you want.
+You can search using a UK postcode to find an area you want. Once a postcode is entered the map automatically scrolls to that area.
 
-#### Dropdown to filter crime types
-
-There is a dropdown menu that allows you to filter the crime types to only the ones you are interested in searching within a selected area. 
+![Postcode search box](../assets/docs-images/postcode-search-feature.png)
 
 #### There is a box showing the top 3 crimes in your selected area and the percentage of those crimes.
 
-This is showing a summary of the most common crimes in the selected area.
+This is showing a summary of the most common crimes in the selected area. These update dynamically as you search a new area.
+
+![Example list of 3 most common crimes in an area](../assets/docs-images/common-crimes-feature.png)
+
+#### Dropdown to filter crime types
+
+There is a dropdown menu that allows you to filter the crime types to only the ones you are interested in searching within a selected area. The contents of this menu update dynamically to include crimes that have been committed in the selected area.
+
+![Example of dropdown including crimes in the area](../assets/docs-images/dynamic-dropdown-feature.png)
+
+#### There is a list of crimes in the area, the crime is highlighted when it's corresponding marker on the map is selected
+
+There is a scrollable list of crimes that appears dynamically when you select a postcode/area on the map. A crime is highlighted when you select the corresponding marker on the map. You can also select a crime, which will open up the pop up for the corresponding marker on the map.
+
+![Example of crime list with an item highlighted](../assets/docs-images/crimes-list-feature.png)
+
+#### There are markers on the map, which when clicked on have pop-ups with information
+
+These markers will also highlight the corresponding crime on the list.
+
+![Example of a marker with a pop-up showing](../assets/docs-images/marker-feature.png)
 
 #### There is a date that shows when the the information was last updated.
 
-This is date is fetched directly from the Police API to explain when it was last updated, so people can understand how up to date the information they are looking at is.
+This date is fetched directly from the Police API to explain when it was last updated, so people can understand how up to date the information they are looking at is.
 
+![Example of a date when the site was last updated](../assets/docs-images/date-feature.png)
+
+#### There is a 'Reload Crimes in View' Button that allows you to reload after scrolling the map
+
+The button allows you to reload the data for your current view after scrolling the map.
+
+![Reload button](../assets/docs-images/reload-button-feature.png)
+
+### User Interface Design Decisions
+
+The main part of the screen is dominated by the map, but there is a sidebar along the left to make navigation and features easier to find.
+
+![sidebar and map](../assets/docs-images/full-screen.png)
+
+The postcode search is at the top of the sidebar as this is likely to be used regularly and should be easy to find.
+
+For mobiles and tablets in portrait mode the title is shortened to 'Crime Map' so it fits on one line. The sidebar is also stacked under the map to give the map more screen space and make it easier to use.
+
+![A tablet and mobile in portrait mode](../assets/docs-images/mobile-portrait.png)
+
+While using mobiles and tablets in landscape mode the sidebar goes back to the side. This make the functions easier to use with the map.
+
+![website in landscape mode](../assets/docs-images/mobile-landscape.png)
 
 ### 2. Technologies Used
 The website is built using HTML, CSS and javascript.
@@ -141,7 +189,7 @@ The exact post I used is here -
 ### 3. Deployment Information
 #### a. Version Control
 
-The site was created using the Visual Studio code editor and pushed to github to the remote repository ‘Swiftsparrow-rec’.
+The site was created using the Visual Studio code editor and pushed to github to the remote repository ‘crime_map’.
 
 The following git commands were used throughout development to push code to the remote repo:
 
@@ -187,6 +235,6 @@ There are still various improvments that could be made to the map.
 
 - Include more information on the pop-up for each crime, including the exact date of the crime and the status of whether it is solved/concluded.
 
-- Improve the map so you can see exactly what are is being searched in a postcode or a click.
+- Improve the map so you can see exactly what area is being searched in a postcode or a click.
 
 - Include a search feature to allow you to search the road names of the crimes in the sidebar.
