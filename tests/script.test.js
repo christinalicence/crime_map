@@ -16,26 +16,15 @@ beforeEach(() => {
 
 
 const  {
-    setupEventListeners,
-    setupPage,
-    initMap,
     lastMonthDate,
-    addCrimeMarkers,
     highlightListedItem,
-    loadCrimes,
-    filterCrimesByCategory,
-    clearMarkers,
-    updateMarkersByCategory,
-    populateCrimeDropdown,
     formatCrimeCategory,
-    displayLastUpdatedDate,
-    updateCrimeList,
     displayErrorMessage,
-    displayTopCrimes
+    displayTopCrimes,
       } = require('../assets/js/script.js');
 
 
-    // mocks leafket
+// mocks leafket
 jest.mock('leaflet', () => {
     return {
         map: jest.fn(() => ({
@@ -58,88 +47,45 @@ jest.mock('leaflet', () => {
 
 });
 
-    // Test for setupEventListeners function
 
-
-    // Test for setupPage function
-
-
-    // Test for initMap function
-
-    // Test for lastMonthDate function
-    describe('lastMonthDate', () => {
-  test('returns a date in YYYY-MM format', () => {
-    const date = lastMonthDate();
-    expect(date).toMatch(/^\d{4}-\d{2}$/); // YYYY-MM format
+// Test for lastMonthDate function
+  describe('lastMonthDate', () => {
+    test('returns a date in YYYY-MM format', () => {
+      const date = lastMonthDate();
+      expect(date).toMatch(/^\d{4}-\d{2}$/); // YYYY-MM format
+    });
   });
-});
 
-
-    // Test for fetchCrimeData function
-
-
-    // Test for addCrimeMarkers function
-
-
-    // Test for highlightListedItem function
+// Test for highlightListedItem function
    describe('highlightListedItem', () => {
-  test('highlights the correct list item and removes highlight from others', () => {
-    const ul = document.querySelector('.crime-items ul');
+    test('highlights the correct list item and removes highlight from others', () => {
+      const ul = document.querySelector('.crime-items ul');
+      const listItem1 = document.createElement('li');
+      listItem1.textContent = 'Crime 1';
+      listItem1.classList.add('highlight');
+      const listItem2 = document.createElement('li');
+      listItem2.textContent = 'Crime 2';
+      listItem2.scrollIntoView = jest.fn(); // Spy on scrollIntoView
+      ul.appendChild(listItem1);
+      ul.appendChild(listItem2);
+      highlightListedItem(listItem2);
 
-    const listItem1 = document.createElement('li');
-    listItem1.textContent = 'Crime 1';
-    listItem1.classList.add('highlight');
-
-    const listItem2 = document.createElement('li');
-    listItem2.textContent = 'Crime 2';
-    listItem2.scrollIntoView = jest.fn(); // Spy on scrollIntoView
-
-    ul.appendChild(listItem1);
-    ul.appendChild(listItem2);
-
-    highlightListedItem(listItem2);
-
-    expect(listItem1.classList.contains('highlight')).toBe(false);
-    expect(listItem2.classList.contains('highlight')).toBe(true);
-    expect(listItem2.scrollIntoView).toHaveBeenCalledWith({
+      expect(listItem1.classList.contains('highlight')).toBe(false);
+      expect(listItem2.classList.contains('highlight')).toBe(true);
+      expect(listItem2.scrollIntoView).toHaveBeenCalledWith({
       behavior: 'smooth',
       block: 'center',
     });
   });
 });
     
-    
-    // Test for loadCrimes function
 
-
-    // Test for filterCrimesByCategory function
-
-
-    // Test for clearMarkers function
-
-
-    // Test for updateMarkersByCategory function
-
-
-
-    // Test for populateCrimeDropdown function
-
-
-
-    // Test for formatCrimeCategory function
+  // Test for formatCrimeCategory function
     test('formatCrimeCategory returns formatted category', () => {
         const category = 'violent-crime';
         const formatted = formatCrimeCategory(category);
         expect(formatted).toBe('Violent Crime');
     });
-
-
-
-    // Test for displayLastUpdatedDate function
-
-
-
-    // Test for updateCrimeList function
 
 
 
@@ -158,4 +104,31 @@ jest.mock('leaflet', () => {
   });   
 
 
-      
+// Test for displayTopCrimes function
+describe('displayTopCrimes', () => { 
+    test('displays the top 3 crimes with percentages', () => {
+      // Mock the crime data from the API  
+      const crimes = [
+            { category: 'violent-crime' },
+            { category: 'violent-crime' },
+            { category: 'violent-crime' },
+            { category: 'violent-crime' },
+            { category: 'violent-crime' },
+            { category: 'burglary' },
+            { category: 'burglary' },
+            { category: 'burglary' },
+            { category: 'vehicle-crime' },
+            { category: 'vehicle-crime' }
+        ];
+        const highestCrimeList = document.createElement('ul');
+        highestCrimeList.id = 'highest-crimes-list';
+        document.body.appendChild(highestCrimeList);
+
+        displayTopCrimes(crimes);
+        const listItems = highestCrimeList.querySelectorAll('li');
+        expect(listItems.length).toBe(3); // Check if only top 3 crimes
+        expect(listItems[0].textContent).toContain('Violent Crime: (50.0%)');
+        expect(listItems[1].textContent).toContain('Burglary: (30.0%)');
+        expect(listItems[2].textContent).toContain('Vehicle Crime: (20.0%)');
+    });
+});

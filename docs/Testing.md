@@ -15,7 +15,7 @@
 ### 2. Automated Testing using Jest
 
 
-## Manual Tesing
+## Manual Testing
 
 ### Are the User Stories Accomplished?
 
@@ -134,7 +134,7 @@ The metrics are
 
 ![Lighthouse Performance Metrics](../assets/docs-images/lighthouse-performance-metrics.png)
 
-I think these are acceptible.
+I think these are acceptable.
 
 ##### Accessibility
 
@@ -193,3 +193,33 @@ User testing was carried out, a useful piece of feedback was to ensure it could 
 
 
 ## Automated Testing using Jest
+
+I chose to write some automated tests for my javascript.
+
+The functions I wrote tests for were 
+
+### lastMonthDate
+
+This is an important function that formats the date correctly for the fetch call to the Police API. I tested it because it is an important one for the API to function.
+
+### highlightListedItem
+
+This function highlights a crime list item when it is clicked on, or the corresponding marker is clicked on. I wanted to test it because it is a visual function that relies on a few different parts to work.
+
+### formatCrimeCategory
+
+This function makes sure that the crimes categories are formatted correctly for display, with a hyphen between words removed and words capitalised. It is important because the categories on the API could change and the site needs to be able to update dynamilcally. I wrote a test for it because it is important for how the site runs in the future.
+
+### displayErrorMessage
+
+This is an important function for user satisfaction with the site, so I wanted to write a test for it to ensure it works comprehensively.
+
+### displayTopCrimes
+
+This function displays the top 3 crime categories in the area and their percentages. I chose to write a test for it because there is a large gap on the screen if it fails, so wanted to test it comprehensviley.
+
+
+
+All the tests were successfully working in Jest
+
+![Jest test results](../assets/docs-images/jest-tests.png)

@@ -535,20 +535,10 @@ function displayErrorMessage(message) {
 //Wraps this in an 'if' to stop errors in the console when running tests
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
-    setupEventListeners,
-    setupPage,
-    initMap,
     lastMonthDate,
-    addCrimeMarkers,
     highlightListedItem,
-    filterCrimesByCategory,
-    clearMarkers,
-    updateMarkersByCategory,
-    populateCrimeDropdown,
     formatCrimeCategory,
-    displayLastUpdatedDate,
-    updateCrimeList,
     displayErrorMessage,
-    displayTopCrimes
+    displayTopCrimes,
   };
 }
