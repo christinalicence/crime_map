@@ -90,7 +90,7 @@ This is a result of the code used by Leaflet Maps which I used to generate the m
 
 I used the [W3C HTML validator](https://validator.w3.org/)
 
-It had no warnings, but there were same "trailing slash on void elements' pointed out 
+It had no warnings, but there were some "trailing slash on void elements' pointed out 
 
 ![HTML validator info points](../assets/docs-images/html-validator.png)
 
@@ -182,6 +182,43 @@ The Lighthouse SEO report is 100%
 
 The different features of the website have been tested extensively. They have been tested to ensure they work and to give appropriate error messages if there is an issue.
 
+#### Postcode Search
+
+This has been tested to ensure the following
+
+- It accepts postcodes that aren't spaced in the standard way and don't use capital letters.
+
+![Incorrectly formatted postcode example](../assets/docs-images/incorrect-format-postcode.png)
+
+- It does not accept postcodes from outside England and Wales
+
+![Example of Scottish postcode with error message displayed](../assets/docs-images/invalid-postcode.png)
+
+- It does select the correct area when a postcode is entered
+
+![Example of postcode search](../assets/docs-images/postcode-search.png)
+
+#### Map Scrolling and Area Selection
+
+The map has been tested to ensure it scrolls around England and Wales. There are bounds at the edges of these countries that you can't scroll past.
+
+There are some times when places that are not in Enlgand and Wales are in view, but if they are selected an error message comes up. This was tested by selecting an area on the Isle of Man.
+
+![Error message which appears if you select an area not in England and Wales](../assets/docs-images/england-and-wales-error.png)
+
+The API works by calling crimes within a 1 mile radius. This means the map needs to be sufficiently zoomed in for the markers to appear. It has been tested that this works and an error message appears if there is an issue when the reload button is pressed. 
+
+![Error message explaing that you need to be further zoomed in](../assets/docs-images/zoom-error.png)
+
+Likewise, it has also been tested that when you click on the map it zooms in sufficiently (level 14 on the Leaflet settings) to give results. However, if there are no crimes in that area an error is shown when the reload button is pressed.
+
+![Error message shown when you cick on an area with no crimes](../assets/docs-images/no-crimes-error.png)
+
+#### Help Modal
+
+This has been tested to ensure that it opens and closes as expected.
+
+![Help modal](../assets/docs-images/help-modal-feature.png)
 
 ### Manual Testing of Responsiveness
 
@@ -194,9 +231,9 @@ User testing was carried out, a useful piece of feedback was to ensure it could 
 
 ## Automated Testing using Jest
 
-I chose to write some automated tests for my javascript.
+There are some automated tests written in Jest for important functions for the site to work.
 
-The functions I wrote tests for were 
+The functions tests are written for are below.
 
 ### lastMonthDate
 

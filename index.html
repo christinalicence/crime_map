@@ -132,7 +132,14 @@
         
 
         <div id="map-container">
-          <div id="map" role="application" aria-label="Interactive Crime Map of England and Wales" tabindex="0"></div>
+          <div id="map" 
+            role="application" 
+            aria-label="Interactive Crime Map of England and Wales" 
+            aria-describedby="map-instructions"
+            tabindex="0"></div>
+              <p id="map-instructions" class="visually-hidden">
+              Use arrow keys to move the map and plus or minus keys to zoom.
+              </p>
           <button id="reload-button">Reload Crimes in View</button>
         </div>
       </div>
