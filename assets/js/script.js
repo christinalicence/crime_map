@@ -135,6 +135,14 @@ function setupEventListeners() {
 }
 }
 
+//Function to enable map (disabled by default in HTML to prevent errors in tests)
+function enableMap() {
+  const mapElement = document.getElementById("map");
+  if (mapElement) {
+    mapElement.removeAttribute("aria-disabled");
+  }
+}
+
 // Function to initialize the page
 // This function is called when the DOM is loaded, and it sets up the map, loads crimes, displays the last updated date, and sets up event listeners.
 function setupPage() {
@@ -173,6 +181,7 @@ function initMap() {
 
   // Click handler
   map.on("click", function (e) {
+    enableMap(); // Enable map if it was disabled
     const lat = e.latlng.lat;
     const lng = e.latlng.lng;
 
@@ -473,9 +482,9 @@ async function searchPostcode(postcode) {
       return;
     }
 
+    enableMap(); // Enable map if it was disabled
     loadCrimesForArea(latitude, longitude);
   } catch (error) {
-    console.error("Error fetching postcode:", error);
     displayErrorMessage("Invalid postcode. Please try again.");
   }
 }

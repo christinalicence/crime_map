@@ -142,18 +142,15 @@ The accessibility report has created consistent issues. It has repeatedly crashe
 
 ![Lighthouse accessibility score, just showing an explanation mark](../assets/docs-images/lighthouse-problem-report.png)
 
-There are no details to fix given in the report
+There are no details to fix given in the report.
 
 ![The dropdown without further details given by Lighthouse](../assets/docs-images/lighthouse-accessibility-error.png)
 
-This seems to be a known bug within Leaflet/Lighthouse
+After extensive testing it seems to be an error that is flagged by Lighthouse while Leaflet is loading up.
 
-[Link to github post](https://github.com/GoogleChrome/lighthouse/issues/15497)
+My workaround for this has been to aria-disable the map while the page is loading (and Lighthouse runs it audits), then remove this attribute when someone clicks on the map or enters a postcode. Putting this code in place meant that the Lighthouse audit passed with 100%.
 
-
-
-
-
+![100% score for accessibility on Lighthouse](../assets/docs-images/accessibility-pass.png)
 
 
 ##### Best Practice

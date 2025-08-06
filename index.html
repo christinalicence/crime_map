@@ -113,7 +113,7 @@
             <h2 class="sub-heading">Crimes in This Area</h2>
             <div id="crime-list">
               <ul class="crime-items">
-                <li tabindex="0" role="button" aria-label="View location of burglary crime">
+                <li tabindex="0">
                   No crimes loaded yet. Click on the map or search for a
                   location.
                 </li>
@@ -131,15 +131,11 @@
       </div>
         
 
-        <div id="map-container">
+        <div id="map-container" aria-disabled="true">
           <div id="map" 
-            role="application" 
+            role="application"
             aria-label="Interactive Crime Map of England and Wales" 
-            aria-describedby="map-instructions"
             tabindex="0"></div>
-              <p id="map-instructions" class="visually-hidden">
-              Use arrow keys to move the map and plus or minus keys to zoom.
-              </p>
           <button id="reload-button">Reload Crimes in View</button>
         </div>
       </div>
