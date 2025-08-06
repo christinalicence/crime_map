@@ -53,7 +53,8 @@
     role="dialog" 
     aria-labelledby="modal-heading" 
     aria-describedby="modal-content"
-    aria-hidden="true">
+    aria-modal="true"
+    hidden>
       <div class="modal-content">
         <button class="close" 
           type="button" 
@@ -82,7 +83,6 @@
 
 <div id="main-container">
 <div id="sidebar-container">
-    <nav>
         <div id="sidebar">
             <div id="search-container">
               <h2 class="sub-heading">Search for a Location</h2>
@@ -113,7 +113,7 @@
             <h2 class="sub-heading">Crimes in This Area</h2>
             <div id="crime-list">
               <ul class="crime-items">
-                <li>
+                <li tabindex="0" role="button" aria-label="View location of burglary crime">
                   No crimes loaded yet. Click on the map or search for a
                   location.
                 </li>
@@ -128,12 +128,11 @@
               </p>
             </div>
           </div>
-        </nav>
       </div>
         
 
-        <div id="map-container" aria-disabled="true">
-          <div id="map"></div>
+        <div id="map-container">
+          <div id="map" role="application" aria-label="Interactive Crime Map of England and Wales" tabindex="0"></div>
           <button id="reload-button">Reload Crimes in View</button>
         </div>
       </div>

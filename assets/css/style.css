@@ -307,6 +307,22 @@ input::placeholder {
   transition: background-color 0.5s ease;
 }
 
+/* Focus style for map to help pass accessibility tests */
+#map:focus {
+  outline: 3px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
+/* Visually Hidden Styles for Accessibility */
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /*  Reload Button Styles */
 #reload-button {
   position: absolute;

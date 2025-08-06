@@ -158,7 +158,7 @@ function initMap() {
     zoomControl: true,
     boxZoom: false,
     dragging: true,
-    keyboard: false,
+    keyboard: true,
     maxBounds: L.latLngBounds(
       [EW_BOUNDS.south, EW_BOUNDS.west],
       [EW_BOUNDS.north, EW_BOUNDS.east]

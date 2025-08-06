@@ -189,7 +189,7 @@ It has been tested on all common screen types, including iphone and android phon
 
 ### User Testing/Feedback
 
-User testing was carried out, a useful piece of feedback was to ensure it could be fully used with just the keyboard. The tab button wasn't working properly to move between different features of the site.
+User testing was carried out, a useful piece of feedback was to ensure it could be fully used with just the keyboard. The tab button wasn't working properly to move between the different crimes in the dropdown list. I solved this by adding tabindex="0" to the code.
 
 
 ## Automated Testing using Jest
