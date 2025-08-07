@@ -59,7 +59,7 @@ body {
 #map { 
   height: 100%;
   width: 100%;
-  min-height: 400px; /* Ensure map for mob devices, so it appears */
+  min-height: 400px; /* Ensure map has size for mob devices, so it appears */
 }
 
 /* Title Style */
@@ -313,16 +313,6 @@ input::placeholder {
   outline-offset: 2px;
 }
 
-/* Visually Hidden Styles for Accessibility */
-.visually-hidden {
-  position: absolute;
-  left: -9999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
 /*  Reload Button Styles */
 #reload-button {
   position: absolute;
@@ -462,7 +452,6 @@ input::placeholder {
     gap: 10px;
   }
 
-  /* Adjust sidebar to take up a portion of the screen */
   #sidebar-container {
     width: 40%; 
     height: 100%;
@@ -470,14 +459,12 @@ input::placeholder {
     padding: 0px 10px; /* Reduced padding for landscape */
   }
   
-  /* Map container takes up the remaining space */
   #map-container {
     height: 100%;
     flex: 1; 
     order: 0; 
   }
 
-  /* Adjust title/header for landscape layout */
   #header-container {
     flex-direction: row; 
     align-items: center;

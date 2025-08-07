@@ -77,7 +77,7 @@ function setupEventListeners() {
   const postcodeInput = document.getElementById("postcode-search");
   if (searchButton && postcodeInput) {
     searchButton.addEventListener("click", () => {
-      const postcode = postcodeInput.value.trim().toUpperCase(); // Convert postcode to uppercase for consistency
+      const postcode = postcodeInput.value.trim().toUpperCase(); // Convert postcode to uppercase and remove spacing
       if (postcode) {
         searchPostcode(postcode);
       } else {

@@ -38,58 +38,77 @@
 
   <body>
     <main>
-     <header>
-      <div id="header-container">
-        <h1 id="title">
+      <header>
+        <div id="header-container">
+          <h1 id="title">
             <span class="full-title">Crime Map of England and Wales</span>
             <span class="mobile-title">Crime Map</span>
-        </h1>
-         <button id="help-button" type="button" aria-label="Open help information">How to use this Map</button>
-      </div>
+          </h1>
+          <button
+            id="help-button"
+            type="button"
+            aria-label="Open help information">
+            How to use this Map
+          </button>
+        </div>
       </header>
       <!--Help Modal-->
-   <div id="help-modal" 
-    class="modal" 
-    role="dialog" 
-    aria-labelledby="modal-heading" 
-    aria-describedby="modal-content"
-    aria-modal="true"
-    hidden>
-      <div class="modal-content">
-        <button class="close" 
-          type="button" 
-          aria-label="Close help dialog"
-          title="Close">&times;</button>
-  
-      <h2 id="modal-heading" class="modal-heading">How to Use the Crime Map</h2>
-      <div id="modal-content">
-        <p class="modal-paragraph">
-            This interactive map shows recent crime data for England and Wales.
-        </p>
-          <h3>How to explore crime data:</h3>
-          <ul>
-            <li>Click anywhere on the map to view crimes in that area</li>
-            <li>Search for a specific postcode using the search box</li>
-            <li>Use the dropdown to filter crimes by type</li>
-           <li>Click on crimes in the list to see their location on the map</li>
-           <li>Use the reload button to refresh data for the current view</li>
-      </ul>
-    <p class="modal-paragraph">
-      Crime data is sourced from the UK Police API and shows the last 3 months of reported crimes. The map updates automatically when new data is available. The date of the last update is shown in the sidebar.
-    </p>
-  </div>
-</div>
-</div>
+      <div
+        id="help-modal"
+        class="modal"
+        role="dialog"
+        aria-labelledby="modal-heading"
+        aria-describedby="modal-content"
+        aria-modal="true"
+        hidden>
+        <div class="modal-content">
+          <button
+            class="close"
+            type="button"
+            aria-label="Close help dialog"
+            title="Close">
+            &times;
+          </button>
 
-<div id="main-container">
-<div id="sidebar-container">
-        <div id="sidebar">
+          <h2 id="modal-heading" class="modal-heading">
+            How to Use the Crime Map
+          </h2>
+          <div id="modal-content">
+            <p class="modal-paragraph">
+              This interactive map shows recent crime data for England and
+              Wales.
+            </p>
+            <h3>How to explore crime data:</h3>
+            <ul>
+              <li>Click anywhere on the map to view crimes in that area</li>
+              <li>Search for a specific postcode using the search box</li>
+              <li>Use the dropdown to filter crimes by type</li>
+              <li>
+                Click on crimes in the list to see their location on the map
+              </li>
+              <li>
+                Use the reload button to refresh data for the current view
+              </li>
+            </ul>
+            <p class="modal-paragraph">
+              Crime data is sourced from the UK Police API and shows the last 3
+              months of reported crimes. The map updates automatically when new
+              data is available. The date of the last update is shown in the
+              sidebar.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="main-container">
+        <div id="sidebar-container">
+          <div id="sidebar">
             <div id="search-container">
               <h2 class="sub-heading">Search for a Location</h2>
               <input
                 type="text"
                 id="postcode-search"
-                placeholder="Enter a postcode..." 
+                placeholder="Enter a postcode..."
                 aria-label="Enter a postcode" />
               <button id="search-button">Search</button>
             </div>
@@ -128,13 +147,13 @@
               </p>
             </div>
           </div>
-      </div>
-        
+        </div>
 
         <div id="map-container" aria-disabled="true">
-          <div id="map" 
+          <div
+            id="map"
             role="application"
-            aria-label="Interactive Crime Map of England and Wales" 
+            aria-label="Interactive Crime Map of England and Wales"
             tabindex="0"></div>
           <button id="reload-button">Reload Crimes in View</button>
         </div>

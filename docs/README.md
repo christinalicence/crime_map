@@ -27,6 +27,10 @@
 
 ### 5. Improvements for Future Releases
 
+### 6. Credits
+
+
+
 
 ### 1. User Experience
 
@@ -60,6 +64,8 @@ A car owner wants to know if it is safe to park their car in an area.
 
 ### Wireframes
 
+Wireframes were built using [Balsamiq](https://balsamiq.com/)
+
 Wireframe for the desktop version -
 
 ![wireframe for desktop](../assets/docs-images/desktopn-wireframe.png)
@@ -78,7 +84,7 @@ I have used a colour scheme that was designed to provide contrast, while still l
 
 ### Fonts
 
-Nunito sans from Google Fonts is used to give a clean look that is easy to read.
+Nunito sans from [Google Fonts](https://fonts.google.com/) is used to give a clean look that is easy to read.
 
 ### Features
 
@@ -86,7 +92,7 @@ The website has several features which allow the user to search crimes nationall
 
 #### How to use Modal
 
-Their is a pop up modal which gives instructions on how to use the map and the features.
+There is a pop up modal which gives instructions on how to use the map and the features.
 
 ![Pop up modal with instructions for using the website](../assets/docs-images/help-modal-feature.png)
 
@@ -223,7 +229,7 @@ Navigate to the GitHub Repository you want to clone to use locally:
 
 ### 4. Testing (See seperate Testing.md file)
 
-The manual and automated testing is documented in the testing.md file.
+The manual and automated testing is documented in the [Testing.md](Testing.md) file.
 
 ### 5. Improvements for Future Releases.
 
@@ -238,3 +244,23 @@ There are still various improvments that could be made to the map.
 - Improve the map so you can see exactly what area is being searched in a postcode or a click.
 
 - Include a search feature to allow you to search the road names of the crimes in the sidebar.
+
+### 6. Credits
+
+[Google Fonts](https://fonts.google.com/) was used for the fonts.
+
+[Balsamiq](https://balsamiq.com/) was used for the wireframes.
+
+[VS Code](https://code.visualstudio.com/) was used as an IDE.
+
+[github](https://github.com/) was used for storage and depolyment.
+
+[https://postcodes.io/](https://postcodes.io/) was used an API.
+
+[https://leafletjs.com/](https://leafletjs.com/) was used for the map.
+
+[https://data.police.uk/](https://data.police.uk/) was used as an API.
+
+[https://stackoverflow.com](https://stackoverflow.com) was used to help with code, particularly dates in javascript.
+
+[Claude AI](https://claude.ai/) was used to generate the colour palette image.
